@@ -14,6 +14,7 @@
 import { terser } from "rollup-plugin-terser";
 
 import indexGenerator from "./rollup-plugins/index-generator.js";
+import wasm2wat from "./rollup-plugins/wat2wasm.js";
 
 export default {
   input: "./src/index.js",
@@ -23,6 +24,7 @@ export default {
   },
   plugins: [
     indexGenerator({ indexPath: "./src/index.js", pluginFolder: "detectors" }),
+    wasm2wat(),
     terser()
   ]
 };

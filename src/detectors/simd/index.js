@@ -11,6 +11,13 @@
  * limitations under the License.
  */
 
-export default function() {
-  return "simd";
+import inlineModule from "wat2wasm:./simd.wat";
+
+export default async function() {
+  try {
+    await new WebAssembly.compile(inlineModule);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }

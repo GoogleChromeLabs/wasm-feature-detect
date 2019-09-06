@@ -31,9 +31,12 @@ export default function({ indexPath, pluginFolder }) {
       const src = plugins
         .map(
           plugin =>
-            `export {default as ${plugin}} from "./${pluginFolder}/${plugin}/index.js";`
+            `
+              export {default as ${plugin}} from "./${pluginFolder}/${plugin}/index.js"; 
+            `
         )
         .join("\n");
+
       return src;
     }
   };
