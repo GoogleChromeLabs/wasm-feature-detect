@@ -16,15 +16,21 @@ import { terser } from "rollup-plugin-terser";
 import indexGenerator from "./rollup-plugins/index-generator.js";
 import wasm2wat from "./rollup-plugins/wat2wasm.js";
 
-export default {
+export default ["esm", "cjs"].map(format => ({
   input: "./src/index.js",
   output: {
-    dir: "dist",
-    format: "esm"
+    dir: `dist/${format}`,
+    format
   },
   plugins: [
     indexGenerator({ indexPath: "./src/index.js", pluginFolder: "detectors" }),
     wasm2wat(),
-    terser()
+    terser({
+      ecma: 8,
+      compress: true,
+      mangle: {
+        toplevel: true
+      }
+    })
   ]
-};
+}));
