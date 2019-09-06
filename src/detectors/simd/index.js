@@ -13,9 +13,11 @@
 
 import inlineModule from "wat2wasm:./simd.wat";
 
+import { testCompile } from "../../helpers.js";
+
 export default async function() {
   try {
-    await new WebAssembly.compile(inlineModule);
+    await testCompile(inlineModule);
     return true;
   } catch (e) {
     return false;

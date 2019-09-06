@@ -11,6 +11,25 @@
  * limitations under the License.
  */
 
-export default function() {
-  return "threads";
+import inlineModule from "wat2wasm:./atomics.wat";
+
+import { testCompile } from "../../helpers.js";
+
+export default async function() {
+  try {
+    // Test for availability of shared Wasm memory
+    new WebAssembly.Memory({ initial: 1, shared: true });
+    // Test for transferability of SABs (needed for Firefox)
+    await new Promise(resolve => {
+      const sab = new SharedArrayBuffer(1);
+      const { port1, port2 } = new MessageChannel();
+      port2.onmessage = resolve;
+      port1.postMessage(sab);
+    });
+    // Test for atomics
+    await testCompile(inlineModule);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
