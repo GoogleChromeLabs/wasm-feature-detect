@@ -1,0 +1,7 @@
+(module
+  (func 
+    (try
+      (catch)
+    )
+  )
+)

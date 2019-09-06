@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import inlineModule from "wat2wasm::./module.wat";
+import inlineModule from "wat2wasm:--enable-reference-types:./module.wat";
 
 import { testCompile } from "../../helpers.js";
 

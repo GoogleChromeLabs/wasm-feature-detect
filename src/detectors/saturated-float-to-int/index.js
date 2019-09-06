@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import inlineModule from "wat2wasm::./module.wat";
+import inlineModule from "wat2wasm:--enable-saturating-float-to-int:./module.wat";
 
 import { testCompile } from "../../helpers.js";
 

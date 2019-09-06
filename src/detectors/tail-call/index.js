@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import inlineModule from "wat2wasm:--enable-tail-call:./tail-call.wat";
+import inlineModule from "wat2wasm:--enable-tail-call:./module.wat";
 
 import { testCompile } from "../../helpers.js";
 

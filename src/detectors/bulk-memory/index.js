@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import inlineModule from "wat2wasm:--enable-bulk-memory:./bulk-memory.wat";
+import inlineModule from "wat2wasm:--enable-bulk-memory:./module.wat";
 
 import { testCompile } from "../../helpers.js";
 

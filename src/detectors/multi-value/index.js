@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import inlineModule from "wat2wasm:--enable-multi-value:./multi-value.wat";
+import inlineModule from "wat2wasm:--enable-multi-value:./module.wat";
 
 import { testCompile } from "../../helpers.js";
 

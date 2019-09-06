@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import inlineModule from "wat2wasm:--enable-simd:./simd.wat";
+import inlineModule from "wat2wasm:--enable-simd:./module.wat";
 
 import { testCompile } from "../../helpers.js";
 

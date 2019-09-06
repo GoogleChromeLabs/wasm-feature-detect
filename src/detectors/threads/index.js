@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import inlineModule from "wat2wasm:--enable-threads:./atomics.wat";
+import inlineModule from "wat2wasm:--enable-threads:./module.wat";
 
 import { testCompile } from "../../helpers.js";
 
