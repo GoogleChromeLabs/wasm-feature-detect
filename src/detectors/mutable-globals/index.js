@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import inlineModule from "wat2wasm:./mutable-globals.wat";
+import inlineModule from "wat2wasm::./mutable-globals.wat";
 
 import { testCompile } from "../../helpers.js";
 

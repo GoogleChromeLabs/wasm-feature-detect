@@ -8,16 +8,16 @@ export default function() {
       if (!id.startsWith(PREFIX)) {
         return;
       }
-      const unresolvedPath = id.substr(PREFIX.length);
+      const [, flags, unresolvedPath] = id.split(":", 3);
       const { id: path } = await this.resolve(unresolvedPath, importer);
-      return PREFIX + path;
+      return PREFIX + [flags, path].join(":");
     },
     async load(id) {
       if (!id.startsWith(PREFIX)) {
         return;
       }
-      const path = id.substr(PREFIX.length);
-      const module = await compileWat(path, ["--enable-simd"]);
+      const [, flags, path] = id.split(":", 3);
+      const module = await compileWat(path, [flags]);
       return `export default "data:application/wasm;base64,${module.toString(
         "base64"
       )}";`;

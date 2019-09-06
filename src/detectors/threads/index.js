@@ -11,14 +11,14 @@
  * limitations under the License.
  */
 
-import inlineModule from "wat2wasm:./atomics.wat";
+import inlineModule from "wat2wasm:--enable-threads:./atomics.wat";
 
 import { testCompile } from "../../helpers.js";
 
 export default async function() {
   try {
     // Test for availability of shared Wasm memory
-    new WebAssembly.Memory({ initial: 1, shared: true });
+    new WebAssembly.Memory({ initial: 1, maximum: 1, shared: true });
     // Test for transferability of SABs (needed for Firefox)
     await new Promise(resolve => {
       const sab = new SharedArrayBuffer(1);
