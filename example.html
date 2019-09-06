@@ -1,0 +1,19 @@
+<!doctype html>
+<table>
+</table>
+<script type="module">
+import * as wasmFeatureDetectors from "./dist/esm/index.js";
+
+async function run() {
+  const table = document.querySelector('table');
+  for(const [name, detector] of Object.entries(wasmFeatureDetectors)) {
+    table.innerHTML += `
+      <tr>
+        <td>${name}</td>
+        <td>${await detector() ? "Yes" : "No"}</td>
+      </tr>
+    `
+  }
+}
+run();
+</script>

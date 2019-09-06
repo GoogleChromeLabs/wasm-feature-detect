@@ -12,3 +12,7 @@ export async function compileWat(watPath, flags = []) {
     .join("");
   return Buffer.from(hex, "hex");
 }
+
+export function camelCaseify(name) {
+  return name.replace(/-\w/g, val => val.slice(1).toUpperCase());
+}

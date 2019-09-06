@@ -14,6 +14,8 @@
 import { promises as fsp } from "fs";
 import { dirname, join } from "path";
 
+import { camelCaseify } from "./helpers.js";
+
 export default function({ indexPath, pluginFolder }) {
   const rootPluginPath = join(dirname(indexPath), pluginFolder);
   return {
@@ -32,7 +34,9 @@ export default function({ indexPath, pluginFolder }) {
         .map(
           plugin =>
             `
-              export {default as ${plugin}} from "./${pluginFolder}/${plugin}/index.js"; 
+              export {default as ${camelCaseify(
+                plugin
+              )}} from "./${pluginFolder}/${plugin}/index.js"; 
             `
         )
         .join("\n");
