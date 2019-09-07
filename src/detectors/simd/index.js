@@ -19,10 +19,5 @@ import inlineModule from "wat2wasm:--enable-simd:./module.wat";
 import { testCompile } from "../../helpers.js";
 
 export default async function() {
-  try {
-    await testCompile(inlineModule);
-    return true;
-  } catch (e) {
-    return false;
-  }
+  return testCompile(inlineModule);
 }

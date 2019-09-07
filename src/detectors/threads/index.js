@@ -31,8 +31,7 @@ export default async function() {
       port1.postMessage(sab);
     });
     // Test for atomics
-    await testCompile(inlineModule);
-    return true;
+    return testCompile(inlineModule);
   } catch (e) {
     return false;
   }

@@ -19,11 +19,5 @@ import inlineModule from "wat2wasm:--enable-saturating-float-to-int:./module.wat
 import { testCompile } from "../../helpers.js";
 
 export default async function() {
-  try {
-    // Test for atomics
-    await testCompile(inlineModule);
-    return true;
-  } catch (e) {
-    return false;
-  }
+  return testCompile(inlineModule);
 }
