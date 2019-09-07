@@ -23,6 +23,7 @@ export default async function() {
     // Test for availability of shared Wasm memory
     new WebAssembly.Memory({ initial: 1, maximum: 1, shared: true });
     // Test for transferability of SABs (needed for Firefox)
+    // https://groups.google.com/forum/#!msg/mozilla.dev.platform/IHkBZlHETpA/dwsMNchWEQAJ
     await new Promise(resolve => {
       const sab = new SharedArrayBuffer(1);
       const { port1, port2 } = new MessageChannel();
