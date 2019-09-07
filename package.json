@@ -3,15 +3,18 @@
   "version": "0.0.1",
   "description": "",
   "main": "dist/cjs/index.js",
-  "module": "dist/esm/indexz.js",
+  "module": "dist/esm/index.js",
   "scripts": {
-    "build": "rollup -c",
-    "fmt": "prettier --write './{,src,rollup-plugins}/**/*.{js,md}'"
+    "build:library": "rollup -c",
+    "build:readme": "node --experimental-modules ./render-readme.mjs",
+    "build": "npm run build:library && npm run build:readme",
+    "fmt": "prettier --write './{,src,rollup-plugins}/**/*.{mjs,js,md}'"
   },
   "keywords": [],
   "author": "Surma <surma@surma.link>",
   "license": "Apache-2.0",
   "devDependencies": {
+    "ejs": "^2.7.1",
     "prettier": "^1.18.2",
     "rollup": "^1.20.3",
     "rollup-plugin-terser": "^5.1.1"

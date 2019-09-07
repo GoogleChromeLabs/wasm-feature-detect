@@ -11,6 +11,9 @@
  * limitations under the License.
  */
 
+// Name: Multi-value
+// Proposal: https://github.com/WebAssembly/multi-value
+
 import inlineModule from "wat2wasm:--enable-multi-value:./module.wat";
 
 import { testCompile } from "../../helpers.js";

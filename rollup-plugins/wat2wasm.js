@@ -1,4 +1,4 @@
-import { compileWat } from "./helpers.js";
+import { compileWat } from "./helpers.mjs";
 
 const PREFIX = "wat2wasm:";
 

@@ -11,6 +11,9 @@
  * limitations under the License.
  */
 
+// Name: Non-trapping float-to-int conversions
+// Proposal: https://github.com/WebAssembly/nontrapping-float-to-int-conversions
+
 import inlineModule from "wat2wasm:--enable-saturating-float-to-int:./module.wat";
 
 import { testCompile } from "../../helpers.js";

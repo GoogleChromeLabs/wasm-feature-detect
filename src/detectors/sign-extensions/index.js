@@ -11,6 +11,9 @@
  * limitations under the License.
  */
 
+// Name: Sign-extension operators
+// Proposal: https://github.com/WebAssembly/sign-extension-ops
+
 import inlineModule from "wat2wasm:--enable-sign-extension:./module.wat";
 
 import { testCompile } from "../../helpers.js";

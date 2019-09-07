@@ -11,6 +11,9 @@
  * limitations under the License.
  */
 
+// Name: Reference Types
+// Proposal: https://github.com/WebAssembly/reference-types
+
 import inlineModule from "wat2wasm:--enable-reference-types:./module.wat";
 
 import { testCompile } from "../../helpers.js";

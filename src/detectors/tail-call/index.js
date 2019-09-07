@@ -11,6 +11,9 @@
  * limitations under the License.
  */
 
+// Name: Tail call
+// Proposal: https://github.com/webassembly/tail-call
+
 import inlineModule from "wat2wasm:--enable-tail-call:./module.wat";
 
 import { testCompile } from "../../helpers.js";

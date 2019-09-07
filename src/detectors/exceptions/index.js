@@ -11,6 +11,9 @@
  * limitations under the License.
  */
 
+// Name: Exception handling
+// Proposal: https://github.com/WebAssembly/exception-handling
+
 import inlineModule from "wat2wasm:--enable-exceptions:./module.wat";
 
 import { testCompile } from "../../helpers.js";

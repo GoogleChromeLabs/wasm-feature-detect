@@ -11,6 +11,9 @@
  * limitations under the License.
  */
 
+// Name: Fixed-Width SIMD
+// Proposal: https://github.com/webassembly/simd
+
 import inlineModule from "wat2wasm:--enable-simd:./module.wat";
 
 import { testCompile } from "../../helpers.js";

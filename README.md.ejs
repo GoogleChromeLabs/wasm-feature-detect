@@ -1,0 +1,47 @@
+# WebAssembly Feature Detection
+
+A small library (700B gzip’d) to detect which features of WebAssembly are supported in your current browser.
+
+## Installation
+
+```
+npm install -g wasm-feature-detect
+```
+
+## Usage
+
+```html
+<script type="module">
+  import {simd} from "https://unpkg.com/wasm-feature-detect?module";
+  
+  simd().then(simdSupported => {
+    if(simdSupported) {
+      /* SIMD support */
+    } else {
+      /* No SIMD support */
+    }
+  });
+</script>
+```
+
+If required, there’s also a UMD version
+
+```html
+<script src="https://unpkg.com/wasm-feature-detect/dist/umd/index.js"></script>
+<script>
+  wasmFeatureDetect.simd().then(/* same as above */);
+</script>
+```
+
+## Detectors
+
+All detectors return a `Promise<bool>`.
+
+| Function | Proposal |
+| --- | --- |
+<% for (let detector of detectors) { _%>
+| `<%= detector.func %>()` | [<%= detector.name %>](<%= detector.proposal %>) |
+<%_ } %>
+
+---
+License Apache-2.0

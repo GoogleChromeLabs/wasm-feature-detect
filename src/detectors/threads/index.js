@@ -11,6 +11,9 @@
  * limitations under the License.
  */
 
+// Name: Threads
+// Proposal: https://github.com/webassembly/threads
+
 import inlineModule from "wat2wasm:--enable-threads:./module.wat";
 
 import { testCompile } from "../../helpers.js";

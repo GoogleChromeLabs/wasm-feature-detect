@@ -11,6 +11,8 @@
  * limitations under the License.
  */
 
+// Name: Importable/Exportable mutable globals
+
 import inlineModule from "wat2wasm::./module.wat";
 
 import { testCompile } from "../../helpers.js";

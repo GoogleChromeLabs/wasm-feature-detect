@@ -14,7 +14,7 @@
 import { promises as fsp } from "fs";
 import { dirname, join } from "path";
 
-import { camelCaseify } from "./helpers.js";
+import { camelCaseify } from "./helpers.mjs";
 
 export default function({ indexPath, pluginFolder }) {
   const rootPluginPath = join(dirname(indexPath), pluginFolder);

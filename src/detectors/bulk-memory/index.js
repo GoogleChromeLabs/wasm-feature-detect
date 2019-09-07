@@ -11,6 +11,9 @@
  * limitations under the License.
  */
 
+// Name: Bulk memory operations
+// Proposal: https://github.com/webassembly/bulk-memory-operations
+
 import inlineModule from "wat2wasm:--enable-bulk-memory:./module.wat";
 
 import { testCompile } from "../../helpers.js";
