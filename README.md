@@ -50,6 +50,14 @@ All detectors return a `Promise<bool>`.
 | `tailCall()`            | [Tail call](https://github.com/webassembly/tail-call)                                                        |
 | `threads()`             | [Threads](https://github.com/webassembly/threads)                                                            |
 
+## Why are all the tests async?
+
+The _technical_ reason is that some tests might have to be augmented to be asynchronous in the future. For example, Firefox is planning to [make a change][ff coop] that would require a `postMessage` call to detect SABs, which are required for threads.
+
+The _other_ reason is that you _should_ be using `WebAssembly.compile`, `WebAssembly.instantiate`, or their streaming versions `WebAssembly.compileStreaming` and `WebAssembly.instantiateStreaming`, which are all asynchronous. You should already be prepared for asynchronous code when using WebAssembly!
+
+[ff coop]: https://groups.google.com/forum/#!msg/mozilla.dev.platform/IHkBZlHETpA/dwsMNchWEQAJ
+
 ---
 
 License Apache-2.0
