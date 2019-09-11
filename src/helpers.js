@@ -15,10 +15,5 @@
 // be called quite often and by having our own function terser can give it
 // a one-letter name.
 export async function testCompile(path) {
-  try {
-    await WebAssembly.compile(await fetch(path).then(r => r.arrayBuffer()));
-    return true;
-  } catch (e) {
-    return false;
-  }
+  return fetch(path).then(r => r.arrayBuffer()).then(WebAssembly.validate);
 }
