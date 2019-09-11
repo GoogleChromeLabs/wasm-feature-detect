@@ -13,6 +13,7 @@
 
 import { exec } from "child_process";
 import { promisify } from "util";
+import { promises as fsp } from "fs";
 
 const execP = promisify(exec);
 
@@ -24,6 +25,15 @@ export async function compileWat(watPath, flags = []) {
     .map(line => line.split(":")[1].replace(/\s+/g, ""))
     .join("");
   return Buffer.from(hex, "hex");
+}
+
+export async function fileExists(path) {
+  try {
+    await fsp.stat(path);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export function camelCaseify(name) {

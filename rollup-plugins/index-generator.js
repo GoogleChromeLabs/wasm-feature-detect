@@ -14,7 +14,7 @@
 import { promises as fsp } from "fs";
 import { dirname, join } from "path";
 
-import { camelCaseify } from "./helpers.mjs";
+import { compileWat, fileExists, camelCaseify } from "./helpers.mjs";
 
 export default function({ indexPath, pluginFolder }) {
   const rootPluginPath = join(dirname(indexPath), pluginFolder);
@@ -30,18 +30,49 @@ export default function({ indexPath, pluginFolder }) {
       }
 
       const plugins = await fsp.readdir(rootPluginPath);
-      const src = plugins
-        .map(
-          plugin =>
-            `
-              export {default as ${camelCaseify(
-                plugin
-              )}} from "./${pluginFolder}/${plugin}/index.js"; 
-            `
-        )
-        .join("\n");
+      const base64s = [];
+      const sources = await Promise.all(
+        plugins.map(async plugin => {
+          const source = await fsp.readFile(
+            `./src/${pluginFolder}/${plugin}/module.wat`,
+            "utf8"
+          );
+          const flags = (/;;\s*Flags:\s*(.+)$/im.exec(source) || [
+            "",
+            ""
+          ])[1].split(" ");
+          const module = await compileWat(
+            `./src/${pluginFolder}/${plugin}/module.wat`,
+            flags
+          );
+          const base64index = base64s.length;
+          base64s.push(module.toString("hex"));
+          if (await fileExists(`./src/${pluginFolder}/${plugin}/index.js`)) {
+            return `
+            import { default as ${camelCaseify(
+              plugin
+            )}_internal } from "./${pluginFolder}/${plugin}/index.js";
+            export async function ${camelCaseify(plugin)}() {
+              return (await validate(${base64index}))
+                && (await ${camelCaseify(plugin)}_internal());
+            }
+            `;
+          }
+          return `
+          export const ${camelCaseify(
+            plugin
+          )} = validate.bind(null, ${base64index});
+          `;
+        })
+      );
 
-      return src;
+      return `
+      import { data, validate } from './helpers.js';
+      // FIXME: data obj is only needed because separate files can't
+      // share globals when stuck together here.
+      data.wasms = [${base64s.map(b => `"${b}"`).join(", ")}];
+      ${sources.join("\n")}
+      `;
     }
   };
 }

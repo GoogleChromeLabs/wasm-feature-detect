@@ -21,14 +21,11 @@ async function run() {
   detectors = await Promise.all(
     detectors.map(async detector => {
       const index = await fsp.readFile(
-        `./src/detectors/${detector}/index.js`,
+        `./src/detectors/${detector}/module.wat`,
         "utf8"
       );
-      const name = (/\/\/\s*Name:\s*(.+)$/im.exec(index) || ["", ""])[1];
-      const proposal = (/\/\/\s*Proposal:\s*(.+)$/im.exec(index) || [
-        "",
-        ""
-      ])[1];
+      const name = (/;;\s*Name:\s*(.+)$/im.exec(index) || ["", ""])[1];
+      const proposal = (/;;\s*Proposal:\s*(.+)$/im.exec(index) || ["", ""])[1];
       return { name, proposal, func: camelCaseify(detector) };
     })
   );
