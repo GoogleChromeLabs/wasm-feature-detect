@@ -1,7 +1,9 @@
 (module
-  (func 
+  (func
     (try
-      (catch)
+      (catch
+        (drop)
+      )
     )
   )
 )

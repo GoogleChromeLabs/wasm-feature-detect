@@ -11,12 +11,25 @@
  * limitations under the License.
  */
 
+function decodeBase64(b64) {
+  try {
+    return Buffer.from(b64, "base64");
+  } catch {
+    const byteString = atob(data);
+    const buffer = new Uint8Array(byteString.length);
+    for (let i = 0; i < byteString.length; i += 1) {
+      buffer[i] = byteString.charCodeAt(i);
+    }
+    return buffer;
+  }
+}
+
 // This function only exists because `WebAssembly.compile` will
 // be called quite often and by having our own function terser can give it
 // a one-letter name.
-export async function testCompile(path) {
+export async function testCompile(data) {
   try {
-    await WebAssembly.compile(await fetch(path).then(r => r.arrayBuffer()));
+    await WebAssembly.compile(decodeBase64(data));
     return true;
   } catch (e) {
     return false;

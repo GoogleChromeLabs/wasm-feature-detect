@@ -31,9 +31,7 @@ export default function() {
       }
       const [, flags, path] = id.split(":", 3);
       const module = await compileWat(path, [flags]);
-      return `export default "data:application/wasm;base64,${module.toString(
-        "base64"
-      )}";`;
+      return `export default "${module.toString("base64")}";`;
     }
   };
 }
