@@ -30,7 +30,6 @@ export default function({ indexPath, pluginFolder }) {
       }
 
       const plugins = await fsp.readdir(rootPluginPath);
-      const base64s = [];
       const sources = await Promise.all(
         plugins.map(async plugin => {
           const source = await fsp.readFile(
@@ -41,27 +40,26 @@ export default function({ indexPath, pluginFolder }) {
             "",
             ""
           ])[1].split(" ");
-          const module = await compileWat(
-            `./src/${pluginFolder}/${plugin}/module.wat`,
-            flags
-          );
-          const hexModule = module.toString("hex");
+          const module = JSON.stringify([
+            ...(await compileWat(
+              `./src/${pluginFolder}/${plugin}/module.wat`,
+              flags
+            ))
+          ]);
           if (await fileExists(`./src/${pluginFolder}/${plugin}/index.js`)) {
             return `
             import { default as ${camelCaseify(
               plugin
             )}_internal } from "./${pluginFolder}/${plugin}/index.js";
             export async function ${camelCaseify(plugin)}() {
-              return (await Promise.all([validate(${JSON.stringify(
-                hexModule
-              )}), ${camelCaseify(plugin)}_internal()])).every(x => x);
+              return (await Promise.all([validate(${module}), ${camelCaseify(
+              plugin
+            )}_internal()])).every(x => x);
             }
             `;
           }
           return `
-          export const ${camelCaseify(
-            plugin
-          )} = validate.bind(null, ${JSON.stringify(hexModule)});
+          export const ${camelCaseify(plugin)} = validate.bind(null, ${module});
           `;
         })
       );
