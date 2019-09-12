@@ -1,7 +1,7 @@
 {
   "name": "wasm-feature-detect",
   "version": "0.0.1",
-  "description": "A small library (700B gzip’d) to detect which features of WebAssembly are supported in your current browser.",
+  "description": "A small library to detect which features of WebAssembly are supported in your current browser.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "scripts": {
