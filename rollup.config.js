@@ -14,7 +14,7 @@
 import { terser } from "rollup-plugin-terser";
 
 import indexGenerator from "./rollup-plugins/index-generator.js";
-import wasm2wat from "./rollup-plugins/wat2wasm.js";
+import sizePrinter from "./rollup-plugins/size-printer.js";
 
 export default ["esm", "cjs", "umd"].map(format => ({
   input: "./src/index.js",
@@ -25,13 +25,13 @@ export default ["esm", "cjs", "umd"].map(format => ({
   },
   plugins: [
     indexGenerator({ indexPath: "./src/index.js", pluginFolder: "detectors" }),
-    wasm2wat(),
     terser({
       ecma: 8,
       compress: true,
       mangle: {
         toplevel: true
       }
-    })
+    }),
+    sizePrinter()
   ]
 }));

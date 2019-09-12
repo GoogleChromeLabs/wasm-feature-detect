@@ -11,14 +11,11 @@
  * limitations under the License.
  */
 
-// This function only exists because `WebAssembly.compile` will
+// This function only exists because `WebAssembly.validate` will
 // be called quite often and by having our own function terser can give it
 // a one-letter name.
-export async function testCompile(path) {
-  try {
-    await WebAssembly.compile(await fetch(path).then(r => r.arrayBuffer()));
-    return true;
-  } catch (e) {
-    return false;
-  }
+export async function validate(hexModule) {
+  return WebAssembly.validate(
+    new Uint8Array(hexModule.match(/(.{1,2})/g).map(v => parseInt(v, 16)))
+  );
 }

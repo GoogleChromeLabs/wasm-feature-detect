@@ -1,6 +1,10 @@
+;; Name: Bulk memory operations
+;; Proposal: https://github.com/webassembly/bulk-memory-operations
+;; Flags: --enable-bulk-memory
+
 (module
   (memory 1)
-  (func 
+  (func
     i32.const 0
     i32.const 0
     i32.const 0
