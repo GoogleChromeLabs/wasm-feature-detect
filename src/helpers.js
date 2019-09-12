@@ -11,17 +11,11 @@
  * limitations under the License.
  */
 
-export const data = {
-  wasms: undefined
-};
-
 // This function only exists because `WebAssembly.validate` will
 // be called quite often and by having our own function terser can give it
 // a one-letter name.
-export async function validate(index) {
+export async function validate(hexModule) {
   return WebAssembly.validate(
-    new Uint8Array(
-      data.wasms[index].match(/(.{1,2})/g).map(v => parseInt(v, 16))
-    )
+    new Uint8Array(hexModule.match(/(.{1,2})/g).map(v => parseInt(v, 16)))
   );
 }

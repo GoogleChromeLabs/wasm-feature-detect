@@ -45,32 +45,29 @@ export default function({ indexPath, pluginFolder }) {
             `./src/${pluginFolder}/${plugin}/module.wat`,
             flags
           );
-          const base64index = base64s.length;
-          base64s.push(module.toString("hex"));
+          const hexModule = module.toString("hex");
           if (await fileExists(`./src/${pluginFolder}/${plugin}/index.js`)) {
             return `
             import { default as ${camelCaseify(
               plugin
             )}_internal } from "./${pluginFolder}/${plugin}/index.js";
             export async function ${camelCaseify(plugin)}() {
-              return (await validate(${base64index}))
-                && (await ${camelCaseify(plugin)}_internal());
+              return (await Promise.all([validate(${JSON.stringify(
+                hexModule
+              )}), ${camelCaseify(plugin)}_internal()])).every(x => x);
             }
             `;
           }
           return `
           export const ${camelCaseify(
             plugin
-          )} = validate.bind(null, ${base64index});
+          )} = validate.bind(null, ${JSON.stringify(hexModule)});
           `;
         })
       );
 
       return `
-      import { data, validate } from './helpers.js';
-      // FIXME: data obj is only needed because separate files can't
-      // share globals when stuck together here.
-      data.wasms = [${base64s.map(b => `"${b}"`).join(", ")}];
+      import { validate } from './helpers.js';
       ${sources.join("\n")}
       `;
     }
