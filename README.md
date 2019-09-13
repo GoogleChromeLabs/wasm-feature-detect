@@ -1,6 +1,12 @@
 # WebAssembly Feature Detection
 
-A small library (~550B gzip’d) to detect which features of WebAssembly are supported in your current browser.
+A small library to detect which features of WebAssembly are supported.
+
+- ✅ Runs in all major browsers
+- ✅ Runs in Node
+- ✅ Provided as an ES6 module, CommonJS and UMD module.
+- ✅ CSP compatible
+- ✅ Only ~550B
 
 ## Installation
 
@@ -56,7 +62,24 @@ The _technical_ reason is that some tests might have to be augmented to be async
 
 The _other_ reason is that you _should_ be using `WebAssembly.compile`, `WebAssembly.instantiate`, or their streaming versions `WebAssembly.compileStreaming` and `WebAssembly.instantiateStreaming`, which are all asynchronous. You should already be prepared for asynchronous code when using WebAssembly!
 
+## Contributing
+
+If you want to contribute a new feature test, all you need to do is create a new folder in `src/detectors` and it will be automatically picked up. The folder must contain a `module.wat` file, which will be compiled using [`wat2wasm`][wat2wasm].
+
+```wat
+;; Name: <Name of the feature for the README>
+;; Proposal: <Link to the proposal’s explainer/repo>
+;; Flags: <CLI flags for `wat2wasm`>
+
+(module
+  ;; More WAT code here
+)
+```
+
+The folder can also contain an optional `index.js` file, whose default export must be an async function. This function can do additional testing in JavaScript and must return a boolean. See the “threads” detector as an example.
+
 [ff coop]: https://groups.google.com/forum/#!msg/mozilla.dev.platform/IHkBZlHETpA/dwsMNchWEQAJ
+[wat2wasm]: https://github.com/webassembly/wabt
 
 ---
 
