@@ -6,7 +6,7 @@ A small library to detect which features of WebAssembly are supported.
 - ✅ Runs in Node
 - ✅ Provided as an ES6 module, CommonJS and UMD module.
 - ✅ CSP compatible
-- ✅ Only ~550B
+- ✅ Only ~<%= gzippedSize %>B gzipped
 
 ## Installation
 
@@ -57,7 +57,7 @@ The _other_ reason is that you _should_ be using `WebAssembly.compile`, `WebAsse
 
 ## Contributing
 
-If you want to contribute a new feature test, all you need to do is create a new folder in `src/detectors` and it will be automatically picked up. The folder must contain a `module.wat` file, which will be compiled using [`wat2wasm`][wat2wasm]. 
+If you want to contribute a new feature test, all you need to do is create a new folder in `src/detectors` and it will be automatically picked up. The folder must contain a `module.wat` file, which will be compiled using [`wat2wasm`][wat2wasm].
 
 ```wat
 ;; Name: <Name of the feature for the README>
