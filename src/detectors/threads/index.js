@@ -15,13 +15,9 @@ export default async function() {
   try {
     // Test for transferability of SABs (needed for Firefox)
     // https://groups.google.com/forum/#!msg/mozilla.dev.platform/IHkBZlHETpA/dwsMNchWEQAJ
-    await new Promise(resolve => {
-      const { port1, port2 } = new MessageChannel();
-      port2.onmessage = resolve;
-      port1.postMessage(new SharedArrayBuffer(1));
-    });
+    new MessageChannel().port1.postMessage(new SharedArrayBuffer(1));
     return true;
-  } catch (e) {
+  } catch {
     return false;
   }
 }
