@@ -25,13 +25,17 @@ export default ["esm", "cjs", "umd"].map(format => ({
   },
   plugins: [
     indexGenerator({ indexPath: "./src/index.js", pluginFolder: "detectors" }),
-    terser({
-      ecma: 8,
-      compress: true,
-      mangle: {
-        toplevel: true
-      }
-    }),
+    ...(process.env.NO_MINIFY
+      ? []
+      : [
+          terser({
+            ecma: 8,
+            compress: true,
+            mangle: {
+              toplevel: true
+            }
+          })
+        ]),
     sizePrinter()
   ]
 }));

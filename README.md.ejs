@@ -1,6 +1,6 @@
 # WebAssembly Feature Detection
 
-A small library (~560B gzip’d) to detect which features of WebAssembly are supported in your current browser.
+A small library (~550B gzip’d) to detect which features of WebAssembly are supported in your current browser.
 
 ## Installation
 
