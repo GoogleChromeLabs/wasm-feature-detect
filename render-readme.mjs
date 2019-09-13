@@ -13,6 +13,7 @@
 
 import ejs from "ejs";
 import { promises as fsp } from "fs";
+import { gzipSync } from "zlib";
 
 import { camelCaseify } from "./rollup-plugins/helpers.mjs";
 
@@ -29,7 +30,12 @@ async function run() {
       return { name, proposal, func: camelCaseify(detector) };
     })
   );
-  const readme = await ejs.renderFile("./README.md.ejs", { detectors });
+  const lib = await fsp.readFile("./dist/esm/index.js");
+  const gzippedLib = gzipSync(lib, { level: 9 });
+  const readme = await ejs.renderFile("./README.md.ejs", {
+    gzippedSize: Math.round(gzippedLib.length / 10) * 10,
+    detectors
+  });
   await fsp.writeFile("./README.md", readme);
 }
 run().catch(err => console.error(err));
