@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<title>Wasm Feature Detect</title>
+<meta charset="utf-8" />
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  :root {
+    --tint: 30;
+    --contrast: 70;
+    --saturation: 10%;
+  }
+  html {
+    background: hsl(
+      var(--tint),
+      var(--saturation),
+      calc(50% + var(--contrast) / 2)
+    );
+    color: hsl(var(--tint), var(--saturation), calc(50% - var(--contrast) / 2));
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+  }
+  body {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 4em;
+    box-sizing: border-box;
+  }
+  section {
+    margin: 4em 0;
+  }
+  #supporttable {
+    margin: 0 auto;
+  }
+  .marker {
+    padding: 0 0.5em;
+  }
+  tr {
+    height: 2em;
+  }
+  tr:nth-of-type(odd) {
+    background-color: hsla(0, 0%, 0%, 0.04);
+  }
+  .not-supported .marker {
+    color: hsl(10, 80%, 40%);
+  }
+  .supported .marker {
+    color: hsl(100, 80%, 50%);
+  }
+  header {
+    font-size: 1.5rem;
+  }
+  footer {
+    font-size: 0.8rem;
+    text-align: right;
+  }
+</style>
+<header>
+  Wasm feature detect —
+  <a
+    href="https://npm.im/wasm-feature-detect"
+    rel="noopener noreferrer"
+    target="_blank"
+    >npm.im/wasm-feature-detect</a
+  >
+</header>
+<section>
+  <h1>Your browser supports:</h1>
+  <table id="supporttable" cellspacing="0"></table>
+</section>
+<script type="module">
+  import * as ft from "./wasm-feature-detect.js";
+
+  async function generate() {
+    let acc = "";
+    for (const [name, detector] of Object.entries(ft)) {
+      const supported = await detector();
+      acc += `
+      <tr class="${supported ? "supported" : "not-supported"}">
+        <td class="marker">${supported ? "✔️" : "❌"}</td>
+        <td class="name">${name}</td>
+        </tr>
+        `;
+    }
+
+    const table = document.querySelector("#supporttable");
+    table.innerHTML = `<tbody>${acc}</tbody>`;
+  }
+  generate();
+</script>
+
+<section>
+  <%- readme %>
+</section>
+
+<footer>
+  Made with 💻 by
+  <a
+    href="https://twitter.com/dassurma"
+    rel="noopener noreferrer"
+    target="_blank"
+    >Surma</a
+  >
+</footer>

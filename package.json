@@ -8,6 +8,7 @@
     "build:library": "rollup -c",
     "build:readme": "node --experimental-modules ./render-readme.mjs",
     "build": "npm run build:library && npm run build:readme && npm run fmt",
+    "build:website": "node genwebsite.js",
     "fmt": "prettier --write ./{,{src,rollup-plugins}/**/}*.{mjs,js,md}"
   },
   "repository": "GoogleChromeLabs/wasm-feature-detect",
@@ -16,6 +17,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "ejs": "^2.7.1",
+    "markdown-it": "^10.0.0",
     "prettier": "^1.18.2",
     "rollup": "^1.20.3",
     "rollup-plugin-terser": "^5.1.1"
