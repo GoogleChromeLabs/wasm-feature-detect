@@ -10,6 +10,7 @@
     --tint: 30;
     --contrast: 70;
     --saturation: 10%;
+    --padding: 4em;
   }
   html {
     background: hsl(
@@ -24,8 +25,13 @@
   body {
     max-width: 960px;
     margin: 0 auto;
-    padding: 0 4em;
+    padding: 4em;
     box-sizing: border-box;
+  }
+  pre, table {
+    margin: 0 -4em;
+    padding: 0 4em;
+    overflow-x: auto;
   }
   section {
     margin: 4em 0;
