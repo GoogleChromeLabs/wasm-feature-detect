@@ -9,7 +9,7 @@
     "build:readme": "node --experimental-modules ./render-readme.mjs",
     "build": "npm run build:library && npm run build:readme && npm run fmt",
     "build:website": "npm run build && node genwebsite.js",
-    "build:website:docker": "docker run -ti --rm -v `pwd`:/usr/src node:12 ./build.sh",
+    "build:website:netlify": "./build.sh",
     "fmt": "prettier --write ./{,{src,rollup-plugins}/**/}*.{mjs,js,md}"
   },
   "repository": "GoogleChromeLabs/wasm-feature-detect",

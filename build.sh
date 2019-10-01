@@ -1,9 +1,8 @@
 #!/bin/bash
 
-curl -L https://github.com/WebAssembly/wabt/releases/download/1.0.12/wabt-1.0.12-linux.tar.gz | tar -xz -C /opt -f -
+mkdir wabt
+curl -L https://github.com/WebAssembly/wabt/releases/download/1.0.12/wabt-1.0.12-linux.tar.gz | tar -xz -C ./wabt
 
-export PATH=$(echo /opt/wabt-*)/:$PATH
+export PATH=$(echo $PWD/wabt/wabt-*)/:$PATH
 
-cd /usr/src
-npm i
 npm run build:website
