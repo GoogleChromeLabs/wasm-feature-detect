@@ -51,11 +51,11 @@ export default function({ indexPath, pluginFolder }) {
             const importName = `${pluginName}_internal`;
             return `
             import { default as ${importName} } from "./${pluginFolder}/${plugin}/index.js";
-            export const ${pluginName} = ${importName}.bind(null, ${module}, validate);
+            export const ${pluginName} = ${importName}.bind(null, new Uint8Array(${module}), validate);
             `;
           }
           return `
-          export const ${pluginName} = validate.bind(null, ${module});
+          export const ${pluginName} = validate.bind(null, new Uint8Array(${module}));
           `;
         })
       );

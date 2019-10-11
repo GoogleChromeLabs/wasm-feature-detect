@@ -15,5 +15,5 @@
 // be called quite often and by having our own function terser can give it
 // a one-letter name.
 export async function validate(module) {
-  return WebAssembly.validate(new Uint8Array(module));
+  return WebAssembly.validate(module);
 }
