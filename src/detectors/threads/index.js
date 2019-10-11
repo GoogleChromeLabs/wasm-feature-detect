@@ -11,7 +11,8 @@
  * limitations under the License.
  */
 
-export default async function() {
+export default async function(module, validate) {
+  if (!(await validate(module))) return false;
   try {
     // Test for transferability of SABs (needed for Firefox)
     // https://groups.google.com/forum/#!msg/mozilla.dev.platform/IHkBZlHETpA/dwsMNchWEQAJ
