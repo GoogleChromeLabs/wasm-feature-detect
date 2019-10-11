@@ -24,22 +24,25 @@ const isBoolean = function (value) {
   return typeof value === 'boolean';
 }
 
-const checkFeature = function (featureName) {
+const checkFeature = async function (featureName) {
   const feature = features[featureName];
   assert(feature, `The feature ${featureName} doesn't exist`);
-  feature().then(function(result) {
-    console.log(`The feature ${featureName} returned: ${result}`);
-    assert(isBoolean(result), `The feature ${featureName} returned: ${result}`);
-  })
+  const result = await feature();
+  console.log(`The feature ${featureName} returned: ${result}`);
+  assert(isBoolean(result), `The feature ${featureName} returned: ${result}`);
 }
 
-checkFeature("bulkMemory");
-checkFeature("exceptions");
-checkFeature("multiValue");
-checkFeature("mutableGlobals");
-checkFeature("referenceTypes");
-checkFeature("saturatedFloatToInt");
-checkFeature("signExtensions");
-checkFeature("simd");
-checkFeature("tailCall");
-checkFeature("threads");
+async function run() {
+  await checkFeature("bulkMemory");
+  await checkFeature("exceptions");
+  await checkFeature("multiValue");
+  await checkFeature("mutableGlobals");
+  await checkFeature("referenceTypes");
+  await checkFeature("saturatedFloatToInt");
+  await checkFeature("signExtensions");
+  await checkFeature("simd");
+  await checkFeature("tailCall");
+  await checkFeature("threads");
+}
+
+run();
