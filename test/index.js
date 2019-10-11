@@ -43,3 +43,4 @@ checkFeature("signExtensions");
 checkFeature("simd");
 checkFeature("tailCall");
 checkFeature("threads");
+checkFeature("bigintParameters");
