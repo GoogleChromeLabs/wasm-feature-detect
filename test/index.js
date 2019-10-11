@@ -21,7 +21,7 @@ process.on("unhandledRejection", err => {
 const features = require(__dirname+'/../dist/cjs');
 
 const isBoolean = function (value) {
-  return value === true || value === false;
+  return typeof value === 'boolean';
 }
 
 const checkFeature = function (featureName) {
