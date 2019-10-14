@@ -43,6 +43,7 @@ async function run() {
   await checkFeature("simd");
   await checkFeature("tailCall");
   await checkFeature("threads");
+  await checkFeature("bigintParameters");
 }
 
 run();
