@@ -46,20 +46,16 @@ export default function({ indexPath, pluginFolder }) {
               flags
             ))
           ]);
+          const pluginName = camelCaseify(plugin);
           if (await fileExists(`./src/${pluginFolder}/${plugin}/index.js`)) {
+            const importName = `${pluginName}_internal`;
             return `
-            import { default as ${camelCaseify(
-              plugin
-            )}_internal } from "./${pluginFolder}/${plugin}/index.js";
-            export async function ${camelCaseify(plugin)}() {
-              return (await Promise.all([validate(${module}), ${camelCaseify(
-              plugin
-            )}_internal()])).every(x => x);
-            }
+            import { default as ${importName} } from "./${pluginFolder}/${plugin}/index.js";
+            export const ${pluginName} = ${importName}.bind(null, new Uint8Array(${module}), validate);
             `;
           }
           return `
-          export const ${camelCaseify(plugin)} = validate.bind(null, ${module});
+          export const ${pluginName} = validate.bind(null, new Uint8Array(${module}));
           `;
         })
       );
