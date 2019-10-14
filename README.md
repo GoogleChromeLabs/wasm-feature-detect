@@ -6,7 +6,7 @@ A small library to detect which features of WebAssembly are supported.
 - ✅ Runs in Node
 - ✅ Provided as an ES6 module, CommonJS and UMD module.
 - ✅ CSP compatible
-- ✅ Only ~590B gzipped
+- ✅ Only ~580B gzipped
 
 ## Installation
 
@@ -45,7 +45,7 @@ All detectors return a `Promise<bool>`.
 
 | Function                | Proposal                                                                                                     |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `bigintParameters()`    | [BigInt integration](https://github.com/WebAssembly/JS-BigInt-integration)                                   |
+| `bigInt()`              | [BigInt integration](https://github.com/WebAssembly/JS-BigInt-integration)                                   |
 | `bulkMemory()`          | [Bulk memory operations](https://github.com/webassembly/bulk-memory-operations)                              |
 | `exceptions()`          | [Exception handling](https://github.com/WebAssembly/exception-handling)                                      |
 | `multiValue()`          | [Multi-value](https://github.com/WebAssembly/multi-value)                                                    |
