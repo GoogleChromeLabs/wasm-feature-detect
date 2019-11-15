@@ -13,7 +13,11 @@
 
 export default async function(bytes) {
   try {
-    const n = 0n;
+    // This will throw a ReferenceError on platforms where BigInt is not
+    // supported. Please do not change the right hand side value to BigInt
+    // literal (i.e. 0n), cause in that case a SyntaxError will be thrown
+    // before an execution.
+    const n = BigInt(0);
     const instance = await WebAssembly.instantiate(bytes);
     return instance.instance.exports.b(n) === n;
   } catch {
