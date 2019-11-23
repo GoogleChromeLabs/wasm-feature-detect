@@ -20,7 +20,7 @@ export default async function(bytes) {
     const n = BigInt(0);
     const instance = await WebAssembly.instantiate(bytes);
     return instance.instance.exports.b(n) === n;
-  } catch {
+  } catch (e) {
     return false;
   }
 }

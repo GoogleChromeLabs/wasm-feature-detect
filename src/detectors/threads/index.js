@@ -18,7 +18,7 @@ export default async function(module, validate) {
     // https://groups.google.com/forum/#!msg/mozilla.dev.platform/IHkBZlHETpA/dwsMNchWEQAJ
     new MessageChannel().port1.postMessage(new SharedArrayBuffer(1));
     return true;
-  } catch {
+  } catch (e) {
     return false;
   }
 }
