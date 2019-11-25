@@ -40,7 +40,7 @@ export default function({ indexPath, pluginFolder }) {
             "",
             ""
           ])[1].split(" ");
-          const module = JSON.stringify([
+          const moduleBytes = JSON.stringify([
             ...(await compileWat(
               `./src/${pluginFolder}/${plugin}/module.wat`,
               flags
@@ -51,17 +51,16 @@ export default function({ indexPath, pluginFolder }) {
             const importName = `${pluginName}_internal`;
             return `
             import { default as ${importName} } from "./${pluginFolder}/${plugin}/index.js";
-            export const ${pluginName} = ${importName}.bind(null, new Uint8Array(${module}), validate);
+            export const ${pluginName} = () => ${importName}(new Uint8Array(${moduleBytes}));
             `;
           }
           return `
-          export const ${pluginName} = validate.bind(null, new Uint8Array(${module}));
+          export const ${pluginName} = () => WebAssembly.validate(new Uint8Array(${moduleBytes}));
           `;
         })
       );
 
       return `
-      import { validate } from './helpers.js';
       ${sources.join("\n")}
       `;
     }

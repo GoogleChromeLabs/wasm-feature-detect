@@ -11,8 +11,8 @@
  * limitations under the License.
  */
 
-export default async function(module, validate) {
-  if (!(await validate(module))) return false;
+export default moduleBytes => {
+  if (!WebAssembly.validate(moduleBytes)) return false;
   try {
     // Test for transferability of SABs (needed for Firefox)
     // https://groups.google.com/forum/#!msg/mozilla.dev.platform/IHkBZlHETpA/dwsMNchWEQAJ
@@ -21,4 +21,4 @@ export default async function(module, validate) {
   } catch (e) {
     return false;
   }
-}
+};

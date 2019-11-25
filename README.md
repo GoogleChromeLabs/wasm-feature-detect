@@ -6,7 +6,7 @@ A small library to detect which features of WebAssembly are supported.
 - ✅ Runs in Node
 - ✅ Provided as an ES6 module, CommonJS and UMD module.
 - ✅ CSP compatible
-- ✅ Only ~580B gzipped
+- ✅ Only ~560B gzipped
 
 ## Installation
 
