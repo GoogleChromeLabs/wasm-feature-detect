@@ -51,11 +51,11 @@ export default function({ indexPath, pluginFolder }) {
             const importName = `${pluginName}_internal`;
             return `
             import { default as ${importName} } from "./${pluginFolder}/${plugin}/index.js";
-            export const ${pluginName} = () => ${importName}(new Uint8Array(${moduleBytes}));
+            export const ${pluginName} = async () => ${importName}(new Uint8Array(${moduleBytes}));
             `;
           }
           return `
-          export const ${pluginName} = () => WebAssembly.validate(new Uint8Array(${moduleBytes}));
+          export const ${pluginName} = async () => WebAssembly.validate(new Uint8Array(${moduleBytes}));
           `;
         })
       );

@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-export default moduleBytes => {
+export default async moduleBytes => {
   if (!WebAssembly.validate(moduleBytes)) return false;
   try {
     // Test for transferability of SABs (needed for Firefox)
