@@ -21,7 +21,9 @@ export default ["esm", "cjs", "umd"].map(format => ({
   output: {
     dir: `dist/${format}`,
     format,
-    name: "wasmFeatureDetect"
+    name: "wasmFeatureDetect",
+    preferConst: true,
+    esModule: false
   },
   plugins: [
     indexGenerator({ indexPath: "./src/index.js", pluginFolder: "detectors" }),
