@@ -27,7 +27,9 @@ const isBoolean = function (value) {
 const checkFeature = async function (featureName) {
   const feature = features[featureName];
   assert(feature, `The feature ${featureName} doesn't exist`);
-  const result = await feature();
+  const syncResult = feature();
+  assert(syncResult instanceof Promise, `The feature ${featureName} is not an asynchronous function`);
+  const result = await syncResult;
   console.log(`The feature ${featureName} returned: ${result}`);
   assert(isBoolean(result), `The feature ${featureName} returned: ${result}`);
 }
