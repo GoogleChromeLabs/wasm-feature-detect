@@ -15,6 +15,7 @@ import { terser } from "rollup-plugin-terser";
 
 import indexGenerator from "./rollup-plugins/index-generator.js";
 import sizePrinter from "./rollup-plugins/size-printer.js";
+import exportInPlace from "./rollup-plugins/export-in-place.js";
 
 export default ["esm", "cjs", "umd"].map(format => ({
   input: "./src/index.js",
@@ -40,7 +41,8 @@ export default ["esm", "cjs", "umd"].map(format => ({
             mangle: {
               toplevel: true
             }
-          })
+          }),
+          ...(format === "esm" ? [exportInPlace()] : [])
         ]),
     sizePrinter()
   ]
