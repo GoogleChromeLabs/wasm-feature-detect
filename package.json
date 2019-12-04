@@ -11,7 +11,7 @@
     "build:website": "npm run build && node genwebsite.js",
     "build:website:netlify": "./build.sh",
     "fmt": "prettier --write ./{,{src,rollup-plugins}/**/}*.{mjs,js,md}",
-    "fmt_test": "test $(prettier -l ./{,{src,rollup-plugins}/**/}*.{mjs,js,md} | wc -l) -eq 0",
+    "fmt_test": "prettier --check ./{,{src,rollup-plugins}/**/}*.{mjs,js,md}",
     "test": "npm run fmt_test && npm run build && node --no-warnings test/index.js"
   },
   "repository": "GoogleChromeLabs/wasm-feature-detect",
