@@ -14,12 +14,11 @@
 export default async moduleBytes => {
   try {
     // This will throw a ReferenceError on platforms where BigInt is not
-    // supported. Please do not change the right hand side value to BigInt
+    // supported. Please do not change the test value to BigInt
     // literal (i.e. 0n), cause in that case a SyntaxError will be thrown
     // before an execution.
-    const n = BigInt(0);
     const instance = await WebAssembly.instantiate(moduleBytes);
-    return instance.instance.exports.b(n) === n;
+    return instance.instance.exports.b(BigInt(0)) === BigInt(0);
   } catch (e) {
     return false;
   }

@@ -16,7 +16,7 @@ import { dirname, join } from "path";
 
 import { compileWat, fileExists, camelCaseify } from "./helpers.mjs";
 
-export default function({ indexPath, pluginFolder }) {
+export default function({ indexPath, pluginFolder, format }) {
   const rootPluginPath = join(dirname(indexPath), pluginFolder);
   return {
     resolveId(id) {
@@ -30,6 +30,7 @@ export default function({ indexPath, pluginFolder }) {
       }
 
       const plugins = await fsp.readdir(rootPluginPath);
+
       const sources = await Promise.all(
         plugins.map(async plugin => {
           const source = await fsp.readFile(
@@ -49,19 +50,38 @@ export default function({ indexPath, pluginFolder }) {
           const pluginName = camelCaseify(plugin);
           if (await fileExists(`./src/${pluginFolder}/${plugin}/index.js`)) {
             const importName = `${pluginName}_internal`;
-            return `
-            import { default as ${importName} } from "./${pluginFolder}/${plugin}/index.js";
-            export const ${pluginName} = async () => ${importName}(new Uint8Array(${moduleBytes}));
-            `;
+            return {
+              import: `import ${importName} from "./${pluginFolder}/${plugin}/index.js";`,
+              exportName: pluginName,
+              exportValue: `() => ${importName}(new Uint8Array(${moduleBytes}))`
+            };
+          } else {
+            return {
+              exportName: pluginName,
+              exportValue: `async () => WebAssembly.validate(new Uint8Array(${moduleBytes}))`
+            };
           }
-          return `
-          export const ${pluginName} = async () => WebAssembly.validate(new Uint8Array(${moduleBytes}));
-          `;
         })
       );
 
+      if (format === "esm") {
+        // For ESM, just use a single `export const`.
+        exports = `export const ${sources
+          .map(s => `${s.exportName} = ${s.exportValue}`)
+          .join(",")}`;
+      } else {
+        // For CJS / UMD it's more optimal size-wise to export everything as a single object.
+        exports = `export default {${sources
+          .map(s => `${s.exportName}: ${s.exportValue}`)
+          .join(",")}}`;
+      }
+
       return `
-      ${sources.join("\n")}
+      ${sources
+        .map(s => s.import)
+        .filter(Boolean)
+        .join("\n")}
+      ${exports}
       `;
     }
   };

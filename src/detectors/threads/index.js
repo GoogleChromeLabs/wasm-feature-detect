@@ -12,12 +12,11 @@
  */
 
 export default async moduleBytes => {
-  if (!WebAssembly.validate(moduleBytes)) return false;
   try {
     // Test for transferability of SABs (needed for Firefox)
     // https://groups.google.com/forum/#!msg/mozilla.dev.platform/IHkBZlHETpA/dwsMNchWEQAJ
     new MessageChannel().port1.postMessage(new SharedArrayBuffer(1));
-    return true;
+    return WebAssembly.validate(moduleBytes);
   } catch (e) {
     return false;
   }

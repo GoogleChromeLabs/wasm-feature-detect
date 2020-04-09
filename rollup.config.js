@@ -15,16 +15,23 @@ import { terser } from "rollup-plugin-terser";
 
 import indexGenerator from "./rollup-plugins/index-generator.js";
 import sizePrinter from "./rollup-plugins/size-printer.js";
+import exportInPlace from "./rollup-plugins/export-in-place.js";
 
 export default ["esm", "cjs", "umd"].map(format => ({
   input: "./src/index.js",
   output: {
     dir: `dist/${format}`,
     format,
-    name: "wasmFeatureDetect"
+    name: "wasmFeatureDetect",
+    preferConst: true,
+    esModule: false
   },
   plugins: [
-    indexGenerator({ indexPath: "./src/index.js", pluginFolder: "detectors" }),
+    indexGenerator({
+      indexPath: "./src/index.js",
+      pluginFolder: "detectors",
+      format
+    }),
     ...(process.env.NO_MINIFY
       ? []
       : [
@@ -34,7 +41,8 @@ export default ["esm", "cjs", "umd"].map(format => ({
             mangle: {
               toplevel: true
             }
-          })
+          }),
+          ...(format === "esm" ? [exportInPlace()] : [])
         ]),
     sizePrinter()
   ]
