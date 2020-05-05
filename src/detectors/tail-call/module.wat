@@ -1,6 +1,6 @@
 ;; Name: Tail call
 ;; Proposal: https://github.com/webassembly/tail-call
-;; Flags: --enable-tail-call
+;; Features: tail_call
 
 (module
   (func

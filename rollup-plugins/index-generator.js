@@ -37,14 +37,14 @@ export default function({ indexPath, pluginFolder, format }) {
             `./src/${pluginFolder}/${plugin}/module.wat`,
             "utf8"
           );
-          const flags = (/;;\s*Flags:\s*(.+)$/im.exec(source) || [
+          const features = (/;;\s*Features:\s*(.+)$/im.exec(source) || [
             "",
             ""
           ])[1].split(" ");
           const moduleBytes = JSON.stringify([
             ...(await compileWat(
               `./src/${pluginFolder}/${plugin}/module.wat`,
-              flags
+              features
             ))
           ]);
           const pluginName = camelCaseify(plugin);

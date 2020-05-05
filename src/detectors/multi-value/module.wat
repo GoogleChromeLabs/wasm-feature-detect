@@ -1,6 +1,6 @@
 ;; Name: Multi-value
 ;; Proposal: https://github.com/WebAssembly/multi-value
-;; Flags: --enable-multi-value
+;; Features: multi_value
 
 (module
   (func (result i32 i32)

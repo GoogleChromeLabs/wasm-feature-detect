@@ -1,6 +1,6 @@
 ;; Name: Sign-extension operators
 ;; Proposal: https://github.com/WebAssembly/sign-extension-ops
-;; Flags: --enable-sign-extension
+;; Features: sign_extension
 
 (module
   (func
