@@ -1,6 +1,6 @@
 ;; Name: Fixed-Width SIMD
 ;; Proposal: https://github.com/webassembly/simd
-;; Flags: --enable-simd
+;; Features: simd
 
 (module
   (func

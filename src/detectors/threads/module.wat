@@ -1,6 +1,6 @@
 ;; Name: Threads
 ;; Proposal: https://github.com/webassembly/threads
-;; Flags: --enable-threads
+;; Features: threads
 
 (module
   (memory 1 1 shared)
