@@ -57,12 +57,12 @@ The _other_ reason is that you _should_ be using `WebAssembly.compile`, `WebAsse
 
 ## Contributing
 
-If you want to contribute a new feature test, all you need to do is create a new folder in `src/detectors` and it will be automatically picked up. The folder must contain a `module.wat` file, which will be compiled using [`wat2wasm`][wat2wasm].
+If you want to contribute a new feature test, all you need to do is create a new folder in `src/detectors` and it will be automatically picked up. The folder must contain a `module.wat` file, which will be compiled using [`wabt.js`](https://github.com/AssemblyScript/wabt.js).
 
 ```wat
 ;; Name: <Name of the feature for the README>
 ;; Proposal: <Link to the proposal’s explainer/repo>
-;; Flags: <CLI flags for `wat2wasm`>
+;; Features: <Space-separated list of WasmFeatures from wabt.js>
 
 (module
   ;; More WAT code here
