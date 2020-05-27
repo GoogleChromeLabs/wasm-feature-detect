@@ -4,10 +4,9 @@
 
 (module
   (func
-    (try
-      (catch
-        (drop)
-      )
-    )
+    try
+    catch
+      drop
+    end
   )
 )
