@@ -18,7 +18,7 @@ const wabt = initWabt();
 
 export async function compileWat(watPath, features = []) {
   const watSource = await fsp.readFile(watPath, "utf-8");
-  const module = wabt.parseWat(
+  const module = (await wabt).parseWat(
     watPath,
     watSource,
     Object.fromEntries(features.map(flag => [flag, true]))
