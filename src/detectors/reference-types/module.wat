@@ -4,7 +4,7 @@
 
 (module
   (func
-    ref.null
+    ref.null func
     drop
   )
 )
