@@ -16,7 +16,7 @@ import { dirname, join } from "path";
 
 import { compileWat, fileExists, camelCaseify } from "./helpers.mjs";
 
-export default function({ indexPath, pluginFolder, format }) {
+export default function({ indexPath, pluginFolder, format, env }) {
   const rootPluginPath = join(dirname(indexPath), pluginFolder);
   return {
     resolveId(id) {
@@ -48,10 +48,15 @@ export default function({ indexPath, pluginFolder, format }) {
             ))
           ]);
           const pluginName = camelCaseify(plugin);
-          if (await fileExists(`./src/${pluginFolder}/${plugin}/index.js`)) {
+          // Only threads has a separate implementation for browser and nodejs.
+          const fileName =
+            plugin == "threads"
+              ? `${pluginFolder}/${plugin}/index-${env}.js`
+              : `${pluginFolder}/${plugin}/index.js`;
+          if (await fileExists(`./src/${fileName}`)) {
             const importName = `${pluginName}_internal`;
             return {
-              import: `import ${importName} from "./${pluginFolder}/${plugin}/index.js";`,
+              import: `import ${importName} from "./${fileName}";`,
               exportName: pluginName,
               exportValue: `() => ${importName}(new Uint8Array(${moduleBytes}))`
             };

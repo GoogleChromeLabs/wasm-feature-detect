@@ -17,33 +17,36 @@ import indexGenerator from "./rollup-plugins/index-generator.js";
 import sizePrinter from "./rollup-plugins/size-printer.js";
 import exportInPlace from "./rollup-plugins/export-in-place.js";
 
-export default ["esm", "cjs", "umd"].map(format => ({
-  input: "./src/index.js",
-  output: {
-    dir: `dist/${format}`,
-    format,
-    name: "wasmFeatureDetect",
-    preferConst: true,
-    esModule: false
-  },
-  plugins: [
-    indexGenerator({
-      indexPath: "./src/index.js",
-      pluginFolder: "detectors",
-      format
-    }),
-    ...(process.env.NO_MINIFY
-      ? []
-      : [
-          terser({
-            ecma: 8,
-            compress: true,
-            mangle: {
-              toplevel: true
-            }
-          }),
-          ...(format === "esm" ? [exportInPlace()] : [])
-        ]),
-    sizePrinter()
-  ]
-}));
+export default ["browser", "node"].flatMap(env =>
+  ["esm", "cjs", "umd"].map(format => ({
+    input: "./src/index.js",
+    output: {
+      file: `dist/${format}/index${env === "browser" ? "" : "-node"}.js`,
+      format,
+      name: "wasmFeatureDetect",
+      preferConst: true,
+      esModule: false
+    },
+    plugins: [
+      indexGenerator({
+        indexPath: "./src/index.js",
+        pluginFolder: "detectors",
+        format,
+        env
+      }),
+      ...(process.env.NO_MINIFY
+        ? []
+        : [
+            terser({
+              ecma: 8,
+              compress: true,
+              mangle: {
+                toplevel: true
+              }
+            }),
+            ...(format === "esm" ? [exportInPlace()] : [])
+          ]),
+      sizePrinter()
+    ]
+  }))
+);
