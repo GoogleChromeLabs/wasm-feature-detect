@@ -13,9 +13,10 @@
 
 export default async moduleBytes => {
   try {
-    const MessageChannelConstructor = await import("worker_threads")
-      .then(m => m.MessageChannel)
-      .catch(() => MessageChannel);
+    const MessageChannelConstructor =
+      typeof MessageChannel !== "undefined"
+        ? MessageChannel
+        : await import("worker_threads").then(m => m.MessageChannel);
     // Test for transferability of SABs (needed for Firefox)
     // https://groups.google.com/forum/#!msg/mozilla.dev.platform/IHkBZlHETpA/dwsMNchWEQAJ
     new MessageChannelConstructor().port1.postMessage(new SharedArrayBuffer(1));
