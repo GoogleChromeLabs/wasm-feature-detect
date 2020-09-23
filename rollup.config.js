@@ -30,7 +30,6 @@ export default ["esm", "cjs", "umd"].map(format => ({
   plugins: [
     indexGenerator({
       indexPath: "./src/index.js",
-      pluginFolder: "detectors",
       format
     }),
     ...(process.env.NO_MINIFY
