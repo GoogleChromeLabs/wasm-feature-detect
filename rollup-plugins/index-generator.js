@@ -12,12 +12,10 @@
  */
 
 import { promises as fsp } from "fs";
-import { dirname, join } from "path";
 
-import { compileWat, fileExists, camelCaseify } from "./helpers.mjs";
+import { compileWat, fileExists, plugins } from "./helpers.mjs";
 
-export default function({ indexPath, pluginFolder, format }) {
-  const rootPluginPath = join(dirname(indexPath), pluginFolder);
+export default function({ indexPath, format }) {
   return {
     resolveId(id) {
       if (id === indexPath) {
@@ -29,35 +27,28 @@ export default function({ indexPath, pluginFolder, format }) {
         return;
       }
 
-      const plugins = await fsp.readdir(rootPluginPath);
-
       const sources = await Promise.all(
-        plugins.map(async plugin => {
-          const source = await fsp.readFile(
-            `./src/${pluginFolder}/${plugin}/module.wat`,
-            "utf8"
-          );
+        plugins.map(async ({ path, name }) => {
+          const source = await fsp.readFile(`${path}/module.wat`, "utf8");
           const features = (/;;\s*Features:\s*(.+)$/im.exec(source) || [
             "",
             ""
           ])[1].split(" ");
           const moduleBytes = JSON.stringify([
-            ...(await compileWat(
-              `./src/${pluginFolder}/${plugin}/module.wat`,
-              features
-            ))
+            ...(await compileWat(`${path}/module.wat`, features))
           ]);
-          const pluginName = camelCaseify(plugin);
-          if (await fileExists(`./src/${pluginFolder}/${plugin}/index.js`)) {
-            const importName = `${pluginName}_internal`;
+          if (await fileExists(`${path}/index.js`)) {
+            const importName = `${name}_internal`;
             return {
-              import: `import ${importName} from "./${pluginFolder}/${plugin}/index.js";`,
-              exportName: pluginName,
+              import: `import ${importName} from ${JSON.stringify(
+                `${path}/index.js`
+              )};`,
+              exportName: name,
               exportValue: `() => ${importName}(new Uint8Array(${moduleBytes}))`
             };
           } else {
             return {
-              exportName: pluginName,
+              exportName: name,
               exportValue: `async () => WebAssembly.validate(new Uint8Array(${moduleBytes}))`
             };
           }

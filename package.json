@@ -7,7 +7,8 @@
   "scripts": {
     "build:library": "rollup -c",
     "build:readme": "node --experimental-modules ./render-readme.mjs",
-    "build": "npm run build:library && npm run build:readme && npm run fmt",
+    "build:dts": "node --experimental-modules ./render-dts.mjs",
+    "build": "npm run build:library && npm run build:readme && npm run build:dts && npm run fmt",
     "build:website": "npm run build && node genwebsite.js",
     "fmt": "prettier --write ./{,{src,rollup-plugins}/**/}*.{mjs,js,md}",
     "fmt_test": "prettier --check ./{,{src,rollup-plugins}/**/}*.{mjs,js,md}",

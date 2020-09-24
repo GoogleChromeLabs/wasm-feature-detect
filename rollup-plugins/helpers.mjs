@@ -12,7 +12,8 @@
  */
 
 import initWabt from "wabt";
-import { promises as fsp } from "fs";
+import { promises as fsp, readdirSync } from "fs";
+import { resolve } from "path";
 
 const wabt = initWabt();
 
@@ -35,6 +36,9 @@ export async function fileExists(path) {
   }
 }
 
-export function camelCaseify(name) {
-  return name.replace(/-\w/g, val => val.slice(1).toUpperCase());
-}
+const pluginFolder = resolve("src/detectors");
+
+export const plugins = readdirSync(pluginFolder).map(plugin => ({
+  path: `${pluginFolder}/${plugin}`,
+  name: plugin.replace(/-\w/g, val => val.slice(1).toUpperCase())
+}));

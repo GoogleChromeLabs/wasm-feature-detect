@@ -15,19 +15,15 @@ import ejs from "ejs";
 import { promises as fsp } from "fs";
 import { gzipSync } from "zlib";
 
-import { camelCaseify } from "./rollup-plugins/helpers.mjs";
+import { plugins } from "./rollup-plugins/helpers.mjs";
 
 async function run() {
-  let detectors = await fsp.readdir("./src/detectors");
-  detectors = await Promise.all(
-    detectors.map(async detector => {
-      const index = await fsp.readFile(
-        `./src/detectors/${detector}/module.wat`,
-        "utf8"
-      );
+  let detectors = await Promise.all(
+    plugins.map(async ({ path, name: func }) => {
+      const index = await fsp.readFile(`${path}/module.wat`, "utf8");
       const name = (/;;\s*Name:\s*(.+)$/im.exec(index) || ["", ""])[1];
       const proposal = (/;;\s*Proposal:\s*(.+)$/im.exec(index) || ["", ""])[1];
-      return { name, proposal, func: camelCaseify(detector) };
+      return { name, proposal, func };
     })
   );
   const lib = await fsp.readFile("./dist/esm/index.js");
