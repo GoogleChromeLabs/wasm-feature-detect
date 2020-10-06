@@ -4,6 +4,10 @@
   "description": "A small library to detect which features of WebAssembly are supported in your current browser.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build:library": "rollup -c",
     "build:readme": "node --experimental-modules ./render-readme.mjs",
