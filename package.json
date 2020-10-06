@@ -10,6 +10,7 @@
     "build:dts": "node --experimental-modules ./render-dts.mjs",
     "build": "npm run build:library && npm run build:readme && npm run build:dts && npm run fmt",
     "build:website": "npm run build && node genwebsite.js",
+    "prepublishOnly": "npm run build",
     "fmt": "prettier --write ./{,{src,rollup-plugins}/**/}*.{mjs,js,md}",
     "fmt_test": "prettier --check ./{,{src,rollup-plugins}/**/}*.{mjs,js,md}",
     "test": "npm run fmt_test && npm run build && node --no-warnings test/index.js"
