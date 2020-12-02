@@ -26,7 +26,6 @@ export default ["esm", "cjs", "umd"].map(format => ({
     preferConst: true,
     esModule: false
   },
-  external: ["worker_threads"],
   plugins: [
     indexGenerator({
       indexPath: "./src/index.js",
