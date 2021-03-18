@@ -5,8 +5,7 @@
 (module
   (func
     try
-    catch
-      drop
+    catch_all
     end
   )
 )
