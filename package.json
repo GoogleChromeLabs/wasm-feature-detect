@@ -1,6 +1,6 @@
 {
   "name": "wasm-feature-detect",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "description": "A small library to detect which features of WebAssembly are supported in your current browser.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -30,6 +30,6 @@
     "prettier": "^1.18.2",
     "rollup": "^1.20.3",
     "rollup-plugin-terser": "^5.1.1",
-    "wabt": "^1.0.21"
+    "wabt": "^1.0.23"
   }
 }
