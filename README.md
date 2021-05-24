@@ -6,7 +6,7 @@ A small library to detect which features of WebAssembly are supported.
 - ✅ Runs in Node
 - ✅ Provided as an ES6 module, CommonJS and UMD module.
 - ✅ CSP compatible
-- ✅ Only ~530B gzipped
+- ✅ Only ~550B gzipped
 
 ## Installation
 
@@ -43,19 +43,20 @@ If required, there’s also a UMD version
 
 All detectors return a `Promise<bool>`.
 
-| Function                | Proposal                                                                                                     |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `bigInt()`              | [BigInt integration](https://github.com/WebAssembly/JS-BigInt-integration)                                   |
-| `bulkMemory()`          | [Bulk memory operations](https://github.com/webassembly/bulk-memory-operations)                              |
-| `exceptions()`          | [Exception handling](https://github.com/WebAssembly/exception-handling)                                      |
-| `multiValue()`          | [Multi-value](https://github.com/WebAssembly/multi-value)                                                    |
-| `mutableGlobals()`      | [Importable/Exportable mutable globals]()                                                                    |
-| `referenceTypes()`      | [Reference Types](https://github.com/WebAssembly/reference-types)                                            |
+| Function | Proposal |
+| --- | --- |
+| `bigInt()` | [BigInt integration](https://github.com/WebAssembly/JS-BigInt-integration) |
+| `bulkMemory()` | [Bulk memory operations](https://github.com/webassembly/bulk-memory-operations) |
+| `exceptions()` | [Exception handling](https://github.com/WebAssembly/exception-handling) |
+| `multiValue()` | [Multi-value](https://github.com/WebAssembly/multi-value) |
+| `mutableGlobals()` | [Importable/Exportable mutable globals]() |
+| `referenceTypes()` | [Reference Types](https://github.com/WebAssembly/reference-types) |
 | `saturatedFloatToInt()` | [Non-trapping float-to-int conversions](https://github.com/WebAssembly/nontrapping-float-to-int-conversions) |
-| `signExtensions()`      | [Sign-extension operators](https://github.com/WebAssembly/sign-extension-ops)                                |
-| `simd()`                | [Fixed-Width SIMD](https://github.com/webassembly/simd)                                                      |
-| `tailCall()`            | [Tail call](https://github.com/webassembly/tail-call)                                                        |
-| `threads()`             | [Threads](https://github.com/webassembly/threads)                                                            |
+| `signExtensions()` | [Sign-extension operators](https://github.com/WebAssembly/sign-extension-ops) |
+| `simd()` | [Fixed-Width SIMD](https://github.com/webassembly/simd) |
+| `tailCall()` | [Tail call](https://github.com/webassembly/tail-call) |
+| `threads()` | [Threads](https://github.com/webassembly/threads) |
+
 
 ## Why are all the tests async?
 
