@@ -46,6 +46,7 @@ async function run() {
   await checkFeature("tailCall");
   await checkFeature("threads");
   await checkFeature("bigInt");
+  await checkFeature("streamingCompilation")
 }
 
 run();
