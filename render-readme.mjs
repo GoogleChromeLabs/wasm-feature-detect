@@ -15,12 +15,17 @@ import ejs from "ejs";
 import { promises as fsp } from "fs";
 import { gzipSync } from "zlib";
 
-import { plugins } from "./rollup-plugins/helpers.mjs";
+import { fileExists, plugins } from "./rollup-plugins/helpers.mjs";
 
 async function run() {
   let detectors = await Promise.all(
     plugins.map(async ({ path, name: func }) => {
-      const index = await fsp.readFile(`${path}/module.wat`, "utf8");
+      let index;
+      if (await fileExists(`${path}/module.wat`)) {
+        index = await fsp.readFile(`${path}/module.wat`, "utf8");
+      } else {
+        index = await fsp.readFile(`${path}/index.js`, "utf8");
+      }
       const name = (/;;\s*Name:\s*(.+)$/im.exec(index) || ["", ""])[1];
       const proposal = (/;;\s*Proposal:\s*(.+)$/im.exec(index) || ["", ""])[1];
       return { name, proposal, func };

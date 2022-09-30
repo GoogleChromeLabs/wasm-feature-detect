@@ -11,6 +11,12 @@
  * limitations under the License.
  */
 
+/*
+;; Name: Streaming Compilation
+;; Proposal: https://webassembly.github.io/spec/web-api/index.html#streaming-modules
+;; Features: streaming_compilation
+*/
+
 export default async () => {
   return "compileStreaming" in WebAssembly;
 };

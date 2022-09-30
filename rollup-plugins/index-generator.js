@@ -29,7 +29,7 @@ export default function({ indexPath, format }) {
 
       const sources = await Promise.all(
         plugins.map(async ({ path, name }) => {
-          let moduleBytes;
+          let moduleBytes = "";
           if (await fileExists(`${path}/module.wat`)) {
             const source = await fsp.readFile(`${path}/module.wat`, "utf8");
             const features = (/;;\s*Features:\s*(.+)$/im.exec(source) || [
@@ -39,8 +39,6 @@ export default function({ indexPath, format }) {
             moduleBytes = JSON.stringify([
               ...(await compileWat(`${path}/module.wat`, features))
             ]);
-          } else {
-            moduleBytes = "";
           }
           if (await fileExists(`${path}/index.js`)) {
             const importName = `${name}_internal`;
