@@ -6,7 +6,7 @@ A small library to detect which features of WebAssembly are supported.
 - ✅ Runs in Node
 - ✅ Provided as an ES6 module, CommonJS and UMD module.
 - ✅ CSP compatible
-- ✅ Only ~560B gzipped
+- ✅ Only ~590B gzipped
 
 ## Installation
 
@@ -43,20 +43,21 @@ If required, there’s also a UMD version
 
 All detectors return a `Promise<bool>`.
 
-| Function                | Proposal                                                                                                     |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `bigInt()`              | [BigInt integration](https://github.com/WebAssembly/JS-BigInt-integration)                                   |
-| `bulkMemory()`          | [Bulk memory operations](https://github.com/webassembly/bulk-memory-operations)                              |
-| `exceptions()`          | [Exception handling](https://github.com/WebAssembly/exception-handling)                                      |
-| `memory64()`            | [Memory64](https://github.com/WebAssembly/memory64)                                                          |
-| `multiValue()`          | [Multi-value](https://github.com/WebAssembly/multi-value)                                                    |
-| `mutableGlobals()`      | [Importable/Exportable mutable globals]()                                                                    |
-| `referenceTypes()`      | [Reference Types](https://github.com/WebAssembly/reference-types)                                            |
-| `saturatedFloatToInt()` | [Non-trapping float-to-int conversions](https://github.com/WebAssembly/nontrapping-float-to-int-conversions) |
-| `signExtensions()`      | [Sign-extension operators](https://github.com/WebAssembly/sign-extension-ops)                                |
-| `simd()`                | [Fixed-Width SIMD](https://github.com/webassembly/simd)                                                      |
-| `tailCall()`            | [Tail call](https://github.com/webassembly/tail-call)                                                        |
-| `threads()`             | [Threads](https://github.com/webassembly/threads)                                                            |
+| Function                 | Proposal                                                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `bigInt()`               | [BigInt integration](https://github.com/WebAssembly/JS-BigInt-integration)                                   |
+| `bulkMemory()`           | [Bulk memory operations](https://github.com/webassembly/bulk-memory-operations)                              |
+| `exceptions()`           | [Exception handling](https://github.com/WebAssembly/exception-handling)                                      |
+| `memory64()`             | [Memory64](https://github.com/WebAssembly/memory64)                                                          |
+| `multiValue()`           | [Multi-value](https://github.com/WebAssembly/multi-value)                                                    |
+| `mutableGlobals()`       | [Importable/Exportable mutable globals]()                                                                    |
+| `referenceTypes()`       | [Reference Types](https://github.com/WebAssembly/reference-types)                                            |
+| `saturatedFloatToInt()`  | [Non-trapping float-to-int conversions](https://github.com/WebAssembly/nontrapping-float-to-int-conversions) |
+| `signExtensions()`       | [Sign-extension operators](https://github.com/WebAssembly/sign-extension-ops)                                |
+| `simd()`                 | [Fixed-Width SIMD](https://github.com/webassembly/simd)                                                      |
+| `streamingCompilation()` | [Streaming Compilation](https://webassembly.github.io/spec/web-api/index.html#streaming-modules)             |
+| `tailCall()`             | [Tail call](https://github.com/webassembly/tail-call)                                                        |
+| `threads()`              | [Threads](https://github.com/webassembly/threads)                                                            |
 
 ## Why are all the tests async?
 
@@ -66,7 +67,7 @@ The _other_ reason is that you _should_ be using `WebAssembly.compile`, `WebAsse
 
 ## Contributing
 
-If you want to contribute a new feature test, all you need to do is create a new folder in `src/detectors` and it will be automatically picked up. The folder must contain a `module.wat` file, which will be compiled using [`wabt.js`](https://github.com/AssemblyScript/wabt.js).
+If you want to contribute a new feature test, all you need to do is create a new folder in `src/detectors` and it will be automatically picked up. The folder may contain a `module.wat` file, which will be compiled using [`wabt.js`](https://github.com/AssemblyScript/wabt.js).
 
 ```wat
 ;; Name: <Name of the feature for the README>
@@ -79,6 +80,7 @@ If you want to contribute a new feature test, all you need to do is create a new
 ```
 
 The folder can also contain an optional `index.js` file, whose default export must be an async function. This function can do additional testing in JavaScript and must return a boolean. See the “threads” detector as an example.
+It must contain at least one of `module.wat` or `index.js`.
 
 [ff coop]: https://groups.google.com/forum/#!msg/mozilla.dev.platform/IHkBZlHETpA/dwsMNchWEQAJ
 [wat2wasm]: https://github.com/webassembly/wabt
