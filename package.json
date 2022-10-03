@@ -24,7 +24,7 @@
   "author": "Surma <surma@surma.link>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "ejs": "^2.7.1",
+    "ejs": "^3.1.7",
     "magic-string": "^0.25.4",
     "markdown-it": "^10.0.0",
     "prettier": "^1.18.2",
