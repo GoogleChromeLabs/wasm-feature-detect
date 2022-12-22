@@ -48,6 +48,7 @@ async function run() {
   await checkFeature("bigInt");
   await checkFeature("streamingCompilation")
   await checkFeature("extendedConst");
+  await checkFeature("relaxedSimd");
 }
 
 run();

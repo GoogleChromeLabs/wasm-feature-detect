@@ -6,7 +6,7 @@ A small library to detect which features of WebAssembly are supported.
 - ✅ Runs in Node
 - ✅ Provided as an ES6 module, CommonJS and UMD module.
 - ✅ CSP compatible
-- ✅ Only ~620B gzipped
+- ✅ Only ~640B gzipped
 
 ## Installation
 
@@ -53,6 +53,7 @@ All detectors return a `Promise<bool>`.
 | `multiValue()`           | [Multi-value](https://github.com/WebAssembly/multi-value)                                                    |
 | `mutableGlobals()`       | [Importable/Exportable mutable globals]()                                                                    |
 | `referenceTypes()`       | [Reference Types](https://github.com/WebAssembly/reference-types)                                            |
+| `relaxedSimd()`          | [Relaxed SIMD](https://github.com/webassembly/relaxed-simd)                                                  |
 | `saturatedFloatToInt()`  | [Non-trapping float-to-int conversions](https://github.com/WebAssembly/nontrapping-float-to-int-conversions) |
 | `signExtensions()`       | [Sign-extension operators](https://github.com/WebAssembly/sign-extension-ops)                                |
 | `simd()`                 | [Fixed-Width SIMD](https://github.com/webassembly/simd)                                                      |
