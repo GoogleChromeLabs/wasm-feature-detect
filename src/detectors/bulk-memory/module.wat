@@ -1,6 +1,5 @@
 ;; Name: Bulk memory operations
 ;; Proposal: https://github.com/webassembly/bulk-memory-operations
-;; Features: bulk_memory
 
 (module
   (memory 1)
