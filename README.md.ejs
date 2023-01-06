@@ -2,11 +2,11 @@
 
 A small library to detect which features of WebAssembly are supported.
 
-- ✅ Runs in all major browsers
-- ✅ Runs in Node
-- ✅ Provided as an ES6 module, CommonJS and UMD module.
+- ✅ Runs in browsers, Node and Deno
+- ✅ Tree-shakable (only bundle the detectors you use)
+- ✅ Provided as an ES6, CommonJS and UMD module.
 - ✅ CSP compatible
-- ✅ Only ~<%= gzippedSize %>B gzipped
+- ✅ All detectors add up to only ~<%= gzippedSize %>B gzipped
 
 ## Installation
 
@@ -18,7 +18,9 @@ npm install -g wasm-feature-detect
 
 ```html
 <script type="module">
-  import { simd } from "https://unpkg.com/wasm-feature-detect?module";
+  import { simd } from "wasm-feature-detect";
+  // Or load directly from unpkg.com
+  // import { simd } from "https://unpkg.com/wasm-feature-detect?module";
 
   simd().then(simdSupported => {
     if (simdSupported) {
