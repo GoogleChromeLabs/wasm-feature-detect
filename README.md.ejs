@@ -19,8 +19,6 @@ npm install -g wasm-feature-detect
 ```html
 <script type="module">
   import { simd } from "wasm-feature-detect";
-  // Or load directly from unpkg.com
-  // import { simd } from "https://unpkg.com/wasm-feature-detect?module";
 
   simd().then(simdSupported => {
     if (simdSupported) {
@@ -29,6 +27,15 @@ npm install -g wasm-feature-detect
       /* No SIMD support */
     }
   });
+</script>
+```
+
+### Hotlinking from Unpkg
+
+```html
+<script type="module">
+  import { simd } from "https://unpkg.com/wasm-feature-detect?module";
+  // ...
 </script>
 ```
 
