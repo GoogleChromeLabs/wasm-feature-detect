@@ -3,6 +3,6 @@
 
 (module
   (func (export "b") (param i64) (result i64)
-    (local.get 0)
+    local.get 0
   )
 )

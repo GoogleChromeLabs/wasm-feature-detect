@@ -13,7 +13,7 @@
 
 import { promises as fsp } from "fs";
 
-import { compileWat, fileExists, plugins } from "./helpers.mjs";
+import { compileWat, compileWast, fileExists, plugins } from "./helpers.mjs";
 
 export default function({ indexPath, format }) {
   return {
@@ -41,6 +41,9 @@ export default function({ indexPath, format }) {
               `${path}/module.wat`,
               features
             );
+            moduleBytes = JSON.stringify([...moduleBuffer]);
+          } else if (await fileExists(`${path}/module.wast`)) {
+            const moduleBuffer = await compileWast(`${path}/module.wast`);
             moduleBytes = JSON.stringify([...moduleBuffer]);
           }
           if (await fileExists(`${path}/index.js`)) {

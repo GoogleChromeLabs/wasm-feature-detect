@@ -1,10 +1,11 @@
 ;; Name: Exception handling
 ;; Proposal: https://github.com/WebAssembly/exception-handling
+;; Features: exceptions
 
 (module
   (func
-    (try
-      (do)
-      (catch_all))
+    try
+    catch_all
+    end
   )
 )

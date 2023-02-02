@@ -23,6 +23,8 @@ async function run() {
       let index;
       if (await fileExists(`${path}/module.wat`)) {
         index = await fsp.readFile(`${path}/module.wat`, "utf8");
+      } else if (await fileExists(`${path}/module.wast`)) {
+        index = await fsp.readFile(`${path}/module.wast`, "utf8");
       } else {
         index = await fsp.readFile(`${path}/index.js`, "utf8");
       }

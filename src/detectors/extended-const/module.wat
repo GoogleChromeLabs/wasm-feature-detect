@@ -1,5 +1,6 @@
 ;; Name: Extented Const Expressesions
 ;; Proposal: https://github.com/WebAssembly/extended-const
+;; Features: extended_const
 
 (module
   (memory 1)
