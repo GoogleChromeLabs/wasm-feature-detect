@@ -19,9 +19,7 @@ export async function compileWat(watPath, features = []) {
   const watSource = await fsp.readFile(watPath, "utf-8");
   try {
     const module = binaryen.parseText(watSource);
-    module.setFeatures(
-      binaryen.Features.All | binaryen.Features.MutableGlobals
-    );
+    module.setFeatures(binaryen.Features.All);
     return module.emitBinary();
   } catch (e) {
     throw Error(`Failure parsing ${watPath}: ${e.message}`);
