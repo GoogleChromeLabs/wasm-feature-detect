@@ -58,7 +58,7 @@ All detectors return a `Promise<bool>`.
 | `bulkMemory()`           | [Bulk memory operations](https://github.com/webassembly/bulk-memory-operations)                              |
 | `exceptions()`           | [Exception handling](https://github.com/WebAssembly/exception-handling)                                      |
 | `extendedConst()`        | [Extented Const Expressesions](https://github.com/WebAssembly/extended-const)                                |
-| `gc()`                   | [Garbage Collection](https://github.com/WebAssembly/JS-BigInt-integration)                                   |
+| `gc()`                   | [Garbage Collection](https://github.com/WebAssembly/gc)                                                      |
 | `memory64()`             | [Memory64](https://github.com/WebAssembly/memory64)                                                          |
 | `multiValue()`           | [Multi-value](https://github.com/WebAssembly/multi-value)                                                    |
 | `mutableGlobals()`       | [Importable/Exportable mutable globals]()                                                                    |
