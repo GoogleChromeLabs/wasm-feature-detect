@@ -3,7 +3,6 @@
 
 (module
   (func
-    ref.null func
-    drop
+    (drop (ref.null func))
   )
 )

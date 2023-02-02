@@ -14,7 +14,6 @@
 /*
 ;; Name: Streaming Compilation
 ;; Proposal: https://webassembly.github.io/spec/web-api/index.html#streaming-modules
-;; Features: streaming_compilation
 */
 
 export default async () => {

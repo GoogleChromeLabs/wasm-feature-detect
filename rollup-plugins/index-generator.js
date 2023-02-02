@@ -17,6 +17,7 @@ import { compileWat, fileExists, plugins } from "./helpers.mjs";
 
 export default function({ indexPath, format }) {
   return {
+    name: "index-generator",
     resolveId(id) {
       if (id === indexPath) {
         return id;
@@ -36,9 +37,11 @@ export default function({ indexPath, format }) {
               "",
               ""
             ])[1].split(" ");
-            moduleBytes = JSON.stringify([
-              ...(await compileWat(`${path}/module.wat`, features))
-            ]);
+            const moduleBuffer = await compileWat(
+              `${path}/module.wat`,
+              features
+            );
+            moduleBytes = JSON.stringify([...moduleBuffer]);
           }
           if (await fileExists(`${path}/index.js`)) {
             const importName = `${name}_internal`;
@@ -58,6 +61,7 @@ export default function({ indexPath, format }) {
         })
       );
 
+      let exports;
       if (format === "esm") {
         // For ESM, just use a single `export const`.
         exports = `export const ${sources

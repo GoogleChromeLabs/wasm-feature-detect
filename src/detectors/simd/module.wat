@@ -3,8 +3,6 @@
 
 (module
   (func (result v128)
-    i32.const 0
-    i8x16.splat
-    i8x16.popcnt
+    (i8x16.splat (i32.const 0))
   )
 )

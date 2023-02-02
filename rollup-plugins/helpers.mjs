@@ -11,20 +11,21 @@
  * limitations under the License.
  */
 
-import initWabt from "wabt";
+import binaryen from "binaryen";
 import { promises as fsp, readdirSync } from "fs";
 import { resolve } from "path";
 
-const wabt = initWabt();
-
 export async function compileWat(watPath, features = []) {
   const watSource = await fsp.readFile(watPath, "utf-8");
-  const module = (await wabt).parseWat(
-    watPath,
-    watSource,
-    Object.fromEntries(features.map(flag => [flag, true]))
-  );
-  return module.toBinary({ canonicalize_lebs: true }).buffer;
+  try {
+    const module = binaryen.parseText(watSource);
+    module.setFeatures(
+      binaryen.Features.All | binaryen.Features.MutableGlobals
+    );
+    return module.emitBinary();
+  } catch (e) {
+    throw Error(`Failure parsing ${watPath}: ${e.message}`);
+  }
 }
 
 export async function fileExists(path) {

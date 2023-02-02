@@ -3,8 +3,7 @@
 
 (module
   (func
-    i32.const 0
-    i32.extend8_s
-    drop
+    (drop
+      (i32.extend8_s (i32.const 0)))
   )
 )
