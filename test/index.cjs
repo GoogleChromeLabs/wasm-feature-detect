@@ -11,33 +11,36 @@
  * limitations under the License.
  */
 
-const assert = require('assert');
+const assert = require("assert");
 
-process.on("unhandledRejection", err => {
-  throw err;
+process.on("unhandledRejection", (err) => {
+	throw err;
 });
 
 // We try to import the generated module
-const features = require(__dirname+'/../dist/cjs/index.cjs');
+const features = require(__dirname + "/../dist/cjs/index.cjs");
 
 const isBoolean = function (value) {
-  return typeof value === 'boolean';
-}
+	return typeof value === "boolean";
+};
 
 const checkFeature = async function (featureName) {
-  const feature = features[featureName];
-  assert(feature, `The feature ${featureName} doesn't exist`);
-  const syncResult = feature();
-  assert(syncResult instanceof Promise, `The feature ${featureName} is not an asynchronous function`);
-  const result = await syncResult;
-  console.log(`The feature ${featureName} returned: ${result}`);
-  assert(isBoolean(result), `The feature ${featureName} returned: ${result}`);
-}
+	const feature = features[featureName];
+	assert(feature, `The feature ${featureName} doesn't exist`);
+	const syncResult = feature();
+	assert(
+		syncResult instanceof Promise,
+		`The feature ${featureName} is not an asynchronous function`
+	);
+	const result = await syncResult;
+	console.log(`The feature ${featureName} returned: ${result}`);
+	assert(isBoolean(result), `The feature ${featureName} returned: ${result}`);
+};
 
 async function run() {
-  for(const feature of Object.keys(features)) {
-    await checkFeature(feature);
-  }
+	for (const feature of Object.keys(features)) {
+		await checkFeature(feature);
+	}
 }
 
 run();

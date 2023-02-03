@@ -19,38 +19,38 @@ import { resolve } from "path";
 const wabt = initWabt();
 
 export async function compileWat(watPath, features = []) {
-  const watSource = await fsp.readFile(watPath, "utf-8");
-  const module = (await wabt).parseWat(
-    watPath,
-    watSource,
-    Object.fromEntries(features.map(flag => [flag, true]))
-  );
-  return module.toBinary({ canonicalize_lebs: true }).buffer;
+	const watSource = await fsp.readFile(watPath, "utf-8");
+	const module = (await wabt).parseWat(
+		watPath,
+		watSource,
+		Object.fromEntries(features.map((flag) => [flag, true]))
+	);
+	return module.toBinary({ canonicalize_lebs: true }).buffer;
 }
 
 export async function compileWast(wastPath, features = []) {
-  const wastSource = await fsp.readFile(wastPath, "utf-8");
-  try {
-    const module = binaryen.parseText(wastSource);
-    module.setFeatures(binaryen.Features.All);
-    return module.emitBinary();
-  } catch (e) {
-    throw Error(`Failure parsing ${wastPath}: ${e.message}`);
-  }
+	const wastSource = await fsp.readFile(wastPath, "utf-8");
+	try {
+		const module = binaryen.parseText(wastSource);
+		module.setFeatures(binaryen.Features.All);
+		return module.emitBinary();
+	} catch (e) {
+		throw Error(`Failure parsing ${wastPath}: ${e.message}`);
+	}
 }
 
 export async function fileExists(path) {
-  try {
-    await fsp.stat(path);
-    return true;
-  } catch {
-    return false;
-  }
+	try {
+		await fsp.stat(path);
+		return true;
+	} catch {
+		return false;
+	}
 }
 
 const pluginFolder = resolve("src/detectors");
 
-export const plugins = readdirSync(pluginFolder).map(plugin => ({
-  path: `${pluginFolder}/${plugin}`,
-  name: plugin.replace(/-\w/g, val => val.slice(1).toUpperCase())
+export const plugins = readdirSync(pluginFolder).map((plugin) => ({
+	path: `${pluginFolder}/${plugin}`,
+	name: plugin.replace(/-\w/g, (val) => val.slice(1).toUpperCase()),
 }));

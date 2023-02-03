@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-export default async moduleBytes => {
+export default async (moduleBytes) => {
   try {
     // This will throw a ReferenceError on platforms where BigInt is not
     // supported. Please do not change the test value to BigInt

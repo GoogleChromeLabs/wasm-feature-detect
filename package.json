@@ -16,8 +16,8 @@
     "build": "npm run build:library && npm run build:readme && npm run build:dts && npm run fmt",
     "build:website": "npm run build && node genwebsite.cjs",
     "prepublishOnly": "npm run build",
-    "fmt": "prettier --write ./{,{src,rollup-plugins}/**/}*.{mjs,js,md}",
-    "fmt_test": "prettier --check ./{,{src,rollup-plugins}/**/}*.{mjs,js,md}",
+    "fmt": "prettier --no-error-on-unmatched-pattern --write ./{,src,test,rollup-plugins}/*.{mjs,cjs,js,md}",
+    "fmt_test": "prettier --check --no-error-on-unmatched-pattern --write ./{,src,test,rollup-plugins}/*.{mjs,cjs,js,md}",
     "test": "npm run fmt_test && npm run build && node --no-warnings test/index.cjs"
   },
   "repository": "GoogleChromeLabs/wasm-feature-detect",
@@ -32,7 +32,7 @@
     "highlight.js": "^11.7.0",
     "magic-string": "^0.25.4",
     "markdown-it": "^12.3.2",
-    "prettier": "^1.18.2",
+    "prettier": "^2.8.3",
     "rollup": "^3.12.1",
     "wabt": "^1.0.32"
   }

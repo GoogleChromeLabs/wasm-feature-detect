@@ -16,8 +16,8 @@ import { writeFileSync } from "fs";
 import { plugins } from "./rollup-plugins/helpers.mjs";
 
 writeFileSync(
-  "./dist/index.d.ts",
-  `export const\n${plugins
-    .map(({ name }) => `${name}: () => Promise<boolean>`)
-    .join(",\n")};`
+	"./dist/index.d.ts",
+	`export const\n${plugins
+		.map(({ name }) => `${name}: () => Promise<boolean>`)
+		.join(",\n")};`
 );

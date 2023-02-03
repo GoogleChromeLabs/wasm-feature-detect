@@ -18,27 +18,27 @@ import { gzipSync } from "zlib";
 import { fileExists, plugins } from "./rollup-plugins/helpers.mjs";
 
 async function run() {
-  let detectors = await Promise.all(
-    plugins.map(async ({ path, name: func }) => {
-      let index;
-      if (await fileExists(`${path}/module.wat`)) {
-        index = await fsp.readFile(`${path}/module.wat`, "utf8");
-      } else if (await fileExists(`${path}/module.wast`)) {
-        index = await fsp.readFile(`${path}/module.wast`, "utf8");
-      } else {
-        index = await fsp.readFile(`${path}/index.js`, "utf8");
-      }
-      const name = (/;;\s*Name:\s*(.+)$/im.exec(index) || ["", ""])[1];
-      const proposal = (/;;\s*Proposal:\s*(.+)$/im.exec(index) || ["", ""])[1];
-      return { name, proposal, func };
-    })
-  );
-  const lib = await fsp.readFile("./dist/esm/index.js");
-  const gzippedLib = gzipSync(lib, { level: 9 });
-  const readme = await ejs.renderFile("./README.md.ejs", {
-    gzippedSize: Math.round(gzippedLib.length / 10) * 10,
-    detectors
-  });
-  await fsp.writeFile("./README.md", readme);
+	let detectors = await Promise.all(
+		plugins.map(async ({ path, name: func }) => {
+			let index;
+			if (await fileExists(`${path}/module.wat`)) {
+				index = await fsp.readFile(`${path}/module.wat`, "utf8");
+			} else if (await fileExists(`${path}/module.wast`)) {
+				index = await fsp.readFile(`${path}/module.wast`, "utf8");
+			} else {
+				index = await fsp.readFile(`${path}/index.js`, "utf8");
+			}
+			const name = (/;;\s*Name:\s*(.+)$/im.exec(index) || ["", ""])[1];
+			const proposal = (/;;\s*Proposal:\s*(.+)$/im.exec(index) || ["", ""])[1];
+			return { name, proposal, func };
+		})
+	);
+	const lib = await fsp.readFile("./dist/esm/index.js");
+	const gzippedLib = gzipSync(lib, { level: 9 });
+	const readme = await ejs.renderFile("./README.md.ejs", {
+		gzippedSize: Math.round(gzippedLib.length / 10) * 10,
+		detectors,
+	});
+	await fsp.writeFile("./README.md", readme);
 }
-run().catch(err => console.error(err));
+run().catch((err) => console.error(err));

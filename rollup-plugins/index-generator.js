@@ -15,75 +15,75 @@ import { promises as fsp } from "fs";
 
 import { compileWat, compileWast, fileExists, plugins } from "./helpers.mjs";
 
-export default function({ indexPath, format }) {
-  return {
-    name: "index-generator",
-    resolveId(id) {
-      if (id === indexPath) {
-        return id;
-      }
-    },
-    async load(id) {
-      if (id !== indexPath) {
-        return;
-      }
+export default function ({ indexPath, format }) {
+	return {
+		name: "index-generator",
+		resolveId(id) {
+			if (id === indexPath) {
+				return id;
+			}
+		},
+		async load(id) {
+			if (id !== indexPath) {
+				return;
+			}
 
-      const sources = await Promise.all(
-        plugins.map(async ({ path, name }) => {
-          let moduleBytes = "";
-          if (await fileExists(`${path}/module.wat`)) {
-            const source = await fsp.readFile(`${path}/module.wat`, "utf8");
-            const features = (/;;\s*Features:\s*(.+)$/im.exec(source) || [
-              "",
-              ""
-            ])[1].split(" ");
-            const moduleBuffer = await compileWat(
-              `${path}/module.wat`,
-              features
-            );
-            moduleBytes = JSON.stringify([...moduleBuffer]);
-          } else if (await fileExists(`${path}/module.wast`)) {
-            const moduleBuffer = await compileWast(`${path}/module.wast`);
-            moduleBytes = JSON.stringify([...moduleBuffer]);
-          }
-          if (await fileExists(`${path}/index.js`)) {
-            const importName = `${name}_internal`;
-            return {
-              import: `import ${importName} from ${JSON.stringify(
-                `${path}/index.js`
-              )};`,
-              exportName: name,
-              exportValue: `() => ${importName}(new Uint8Array(${moduleBytes}))`
-            };
-          } else {
-            return {
-              exportName: name,
-              exportValue: `async () => WebAssembly.validate(new Uint8Array(${moduleBytes}))`
-            };
-          }
-        })
-      );
+			const sources = await Promise.all(
+				plugins.map(async ({ path, name }) => {
+					let moduleBytes = "";
+					if (await fileExists(`${path}/module.wat`)) {
+						const source = await fsp.readFile(`${path}/module.wat`, "utf8");
+						const features = (/;;\s*Features:\s*(.+)$/im.exec(source) || [
+							"",
+							"",
+						])[1].split(" ");
+						const moduleBuffer = await compileWat(
+							`${path}/module.wat`,
+							features
+						);
+						moduleBytes = JSON.stringify([...moduleBuffer]);
+					} else if (await fileExists(`${path}/module.wast`)) {
+						const moduleBuffer = await compileWast(`${path}/module.wast`);
+						moduleBytes = JSON.stringify([...moduleBuffer]);
+					}
+					if (await fileExists(`${path}/index.js`)) {
+						const importName = `${name}_internal`;
+						return {
+							import: `import ${importName} from ${JSON.stringify(
+								`${path}/index.js`
+							)};`,
+							exportName: name,
+							exportValue: `() => ${importName}(new Uint8Array(${moduleBytes}))`,
+						};
+					} else {
+						return {
+							exportName: name,
+							exportValue: `async () => WebAssembly.validate(new Uint8Array(${moduleBytes}))`,
+						};
+					}
+				})
+			);
 
-      let exports;
-      if (format === "esm") {
-        // For ESM, just use a single `export const`.
-        exports = `export const ${sources
-          .map(s => `${s.exportName} = ${s.exportValue}`)
-          .join(",")}`;
-      } else {
-        // For CJS / UMD it's more optimal size-wise to export everything as a single object.
-        exports = `export default {${sources
-          .map(s => `${s.exportName}: ${s.exportValue}`)
-          .join(",")}}`;
-      }
+			let exports;
+			if (format === "esm") {
+				// For ESM, just use a single `export const`.
+				exports = `export const ${sources
+					.map((s) => `${s.exportName} = ${s.exportValue}`)
+					.join(",")}`;
+			} else {
+				// For CJS / UMD it's more optimal size-wise to export everything as a single object.
+				exports = `export default {${sources
+					.map((s) => `${s.exportName}: ${s.exportValue}`)
+					.join(",")}}`;
+			}
 
-      return `
+			return `
       ${sources
-        .map(s => s.import)
-        .filter(Boolean)
-        .join("\n")}
+				.map((s) => s.import)
+				.filter(Boolean)
+				.join("\n")}
       ${exports}
       `;
-    }
-  };
+		},
+	};
 }

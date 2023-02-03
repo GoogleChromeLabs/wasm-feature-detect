@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-export default async moduleBytes => {
+export default async (moduleBytes) => {
   try {
     if (typeof MessageChannel !== "undefined") {
       // Test for transferability of SABs (needed for Firefox)
