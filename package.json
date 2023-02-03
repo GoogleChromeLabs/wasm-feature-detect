@@ -5,6 +5,7 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
   "files": [
     "dist"
   ],
@@ -13,7 +14,7 @@
     "build:readme": "node --experimental-modules ./render-readme.mjs",
     "build:dts": "node --experimental-modules ./render-dts.mjs",
     "build": "npm run build:library && npm run build:readme && npm run build:dts && npm run fmt",
-    "build:website": "npm run build && node genwebsite.js",
+    "build:website": "npm run build && node genwebsite.cjs",
     "prepublishOnly": "npm run build",
     "fmt": "prettier --write ./{,{src,rollup-plugins}/**/}*.{mjs,js,md}",
     "fmt_test": "prettier --check ./{,{src,rollup-plugins}/**/}*.{mjs,js,md}",
@@ -24,13 +25,15 @@
   "author": "Surma <surma@surma.link>",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-terser": "^0.4.0",
+    "binaryen": "^111.0.0",
     "ejs": "^3.1.7",
     "highlight.js": "^11.7.0",
     "magic-string": "^0.25.4",
     "markdown-it": "^12.3.2",
     "prettier": "^1.18.2",
-    "rollup": "^1.20.3",
-    "rollup-plugin-terser": "^5.1.1",
+    "rollup": "^3.12.1",
     "wabt": "^1.0.32"
   }
 }

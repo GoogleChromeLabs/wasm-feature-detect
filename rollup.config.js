@@ -11,7 +11,8 @@
  * limitations under the License.
  */
 
-import { terser } from "rollup-plugin-terser";
+import terser from "@rollup/plugin-terser";
+import commonjs from "@rollup/plugin-commonjs";
 
 import indexGenerator from "./rollup-plugins/index-generator.js";
 import sizePrinter from "./rollup-plugins/size-printer.js";
@@ -23,10 +24,15 @@ export default ["esm", "cjs", "umd"].map(format => ({
     dir: `dist/${format}`,
     format,
     name: "wasmFeatureDetect",
-    preferConst: true,
-    esModule: false
+    esModule: false,
+    generatedCode: {
+      constBindings: true
+    }
   },
   plugins: [
+    commonjs({
+      include: ["binaryen"]
+    }),
     indexGenerator({
       indexPath: "./src/index.js",
       format

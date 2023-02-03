@@ -11,6 +11,7 @@
  * limitations under the License.
  */
 
+import binaryen from "binaryen";
 import initWabt from "wabt";
 import { promises as fsp, readdirSync } from "fs";
 import { resolve } from "path";
@@ -25,6 +26,17 @@ export async function compileWat(watPath, features = []) {
     Object.fromEntries(features.map(flag => [flag, true]))
   );
   return module.toBinary({ canonicalize_lebs: true }).buffer;
+}
+
+export async function compileWast(wastPath, features = []) {
+  const wastSource = await fsp.readFile(wastPath, "utf-8");
+  try {
+    const module = binaryen.parseText(wastSource);
+    module.setFeatures(binaryen.Features.All);
+    return module.emitBinary();
+  } catch (e) {
+    throw Error(`Failure parsing ${wastPath}: ${e.message}`);
+  }
 }
 
 export async function fileExists(path) {
