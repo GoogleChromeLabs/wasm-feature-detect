@@ -20,13 +20,11 @@ npm install -g wasm-feature-detect
 <script type="module">
   import { simd } from "wasm-feature-detect";
 
-  simd().then(simdSupported => {
-    if (simdSupported) {
-      /* SIMD support */
-    } else {
-      /* No SIMD support */
-    }
-  });
+  if (await simd()) {
+    /* SIMD support */
+  } else {
+    /* No SIMD support */
+  }
 </script>
 ```
 
@@ -44,7 +42,9 @@ If required, there’s also a UMD version
 ```html
 <script src="https://unpkg.com/wasm-feature-detect/dist/umd/index.js"></script>
 <script>
-  wasmFeatureDetect.simd().then(/* same as above */);
+  if (await wasmFeatureDetect.simd()) {
+    // ...
+  }
 </script>
 ```
 
