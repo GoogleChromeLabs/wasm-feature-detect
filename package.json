@@ -2,7 +2,7 @@
   "name": "wasm-feature-detect",
   "version": "1.4.0",
   "description": "A small library to detect which features of WebAssembly are supported in your current browser.",
-  "main": "dist/cjs/index.js",
+  "main": "dist/cjs/index.cjs",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
@@ -18,7 +18,7 @@
     "prepublishOnly": "npm run build",
     "fmt": "prettier --write ./{,{src,rollup-plugins}/**/}*.{mjs,js,md}",
     "fmt_test": "prettier --check ./{,{src,rollup-plugins}/**/}*.{mjs,js,md}",
-    "test": "npm run fmt_test && npm run build && node --no-warnings test/index.js"
+    "test": "npm run fmt_test && npm run build && node --no-warnings test/index.cjs"
   },
   "repository": "GoogleChromeLabs/wasm-feature-detect",
   "keywords": [],

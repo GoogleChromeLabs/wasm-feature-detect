@@ -19,9 +19,9 @@ import sizePrinter from "./rollup-plugins/size-printer.js";
 import exportInPlace from "./rollup-plugins/export-in-place.js";
 
 export default ["esm", "cjs", "umd"].map(format => ({
-  input: "./src/index.js",
+  input: `./src/index.js`,
   output: {
-    dir: `dist/${format}`,
+    file: `dist/${format}/index.${format === "cjs" ? "cjs" : "js"}`,
     format,
     name: "wasmFeatureDetect",
     esModule: false,

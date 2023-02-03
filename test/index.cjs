@@ -18,7 +18,7 @@ process.on("unhandledRejection", err => {
 });
 
 // We try to import the generated module
-const features = require(__dirname+'/../dist/cjs');
+const features = require(__dirname+'/../dist/cjs/index.cjs');
 
 const isBoolean = function (value) {
   return typeof value === 'boolean';
@@ -35,20 +35,9 @@ const checkFeature = async function (featureName) {
 }
 
 async function run() {
-  await checkFeature("bulkMemory");
-  await checkFeature("exceptions");
-  await checkFeature("multiValue");
-  await checkFeature("mutableGlobals");
-  await checkFeature("referenceTypes");
-  await checkFeature("saturatedFloatToInt");
-  await checkFeature("signExtensions");
-  await checkFeature("simd");
-  await checkFeature("tailCall");
-  await checkFeature("threads");
-  await checkFeature("bigInt");
-  await checkFeature("streamingCompilation")
-  await checkFeature("extendedConst");
-  await checkFeature("relaxedSimd");
+  for(const feature of Object.keys(features)) {
+    await checkFeature(feature);
+  }
 }
 
 run();
