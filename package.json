@@ -1,6 +1,6 @@
 {
   "name": "wasm-feature-detect",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "A small library to detect which features of WebAssembly are supported in your current browser.",
   "exports": {
     "import": "./dist/esm/index.js",
