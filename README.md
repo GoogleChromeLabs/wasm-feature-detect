@@ -6,7 +6,7 @@ A small library to detect which features of WebAssembly are supported.
 - ✅ Tree-shakable (only bundle the detectors you use)
 - ✅ Provided as an ES6, CommonJS and UMD module.
 - ✅ CSP compatible
-- ✅ All detectors add up to only ~670B gzipped
+- ✅ All detectors add up to only ~680B gzipped
 
 ## Installation
 
@@ -59,6 +59,7 @@ All detectors return a `Promise<bool>`.
 | `exceptions()`           | [Exception handling](https://github.com/WebAssembly/exception-handling)                                      |
 | `extendedConst()`        | [Extented Const Expressesions](https://github.com/WebAssembly/extended-const)                                |
 | `gc()`                   | [Garbage Collection](https://github.com/WebAssembly/gc)                                                      |
+| `jspi()`                 | [JavaScript Promise Integration](https://github.com/WebAssembly/js-promise-integration)                      |
 | `memory64()`             | [Memory64](https://github.com/WebAssembly/memory64)                                                          |
 | `multiValue()`           | [Multi-value](https://github.com/WebAssembly/multi-value)                                                    |
 | `mutableGlobals()`       | [Importable/Exportable mutable globals]()                                                                    |
