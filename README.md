@@ -6,7 +6,7 @@ A small library to detect which features of WebAssembly are supported.
 - ✅ Tree-shakable (only bundle the detectors you use)
 - ✅ Provided as an ES6, CommonJS and UMD module.
 - ✅ CSP compatible
-- ✅ All detectors add up to only ~680B gzipped
+- ✅ All detectors add up to only ~700B gzipped
 
 ## Installation
 
@@ -71,6 +71,7 @@ All detectors return a `Promise<bool>`.
 | `streamingCompilation()` | [Streaming Compilation](https://webassembly.github.io/spec/web-api/index.html#streaming-modules)             |
 | `tailCall()`             | [Tail call](https://github.com/webassembly/tail-call)                                                        |
 | `threads()`              | [Threads](https://github.com/webassembly/threads)                                                            |
+| `typeReflection()`       | [Type Reflection](https://github.com/WebAssembly/js-types)                                                   |
 
 ## Why are all the tests async?
 
