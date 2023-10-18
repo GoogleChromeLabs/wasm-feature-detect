@@ -18,8 +18,8 @@
     "build": "npm run build:library && npm run build:readme && npm run build:dts && npm run fmt",
     "build:website": "npm run build && node genwebsite.cjs",
     "prepublishOnly": "npm run build",
-    "fmt": "prettier --no-error-on-unmatched-pattern --write ./{,src,test,rollup-plugins}/*.{mjs,cjs,js,md}",
-    "fmt_test": "prettier --check --no-error-on-unmatched-pattern --write ./{,src,test,rollup-plugins}/*.{mjs,cjs,js,md}",
+    "fmt": "prettier --write ./{src,test,rollup-plugins}/*.{mjs,cjs,js,md} *.{mjs,cjs,js,md}",
+    "fmt_test": "prettier --check --no-error-on-unmatched-pattern --write ./{src,test,rollup-plugins}/*.{mjs,cjs,js,md} *.{mjs,cjs,js,md}",
     "test": "npm run fmt_test && npm run build && node --no-warnings test/index.cjs"
   },
   "repository": "GoogleChromeLabs/wasm-feature-detect",

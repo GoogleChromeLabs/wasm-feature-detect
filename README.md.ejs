@@ -18,13 +18,13 @@ npm install -g wasm-feature-detect
 
 ```html
 <script type="module">
-  import { simd } from "wasm-feature-detect";
+	import { simd } from "wasm-feature-detect";
 
-  if (await simd()) {
-    /* SIMD support */
-  } else {
-    /* No SIMD support */
-  }
+	if (await simd()) {
+		/* SIMD support */
+	} else {
+		/* No SIMD support */
+	}
 </script>
 ```
 
@@ -32,8 +32,8 @@ npm install -g wasm-feature-detect
 
 ```html
 <script type="module">
-  import { simd } from "https://unpkg.com/wasm-feature-detect?module";
-  // ...
+	import { simd } from "https://unpkg.com/wasm-feature-detect?module";
+	// ...
 </script>
 ```
 
@@ -42,9 +42,9 @@ If required, there’s also a UMD version
 ```html
 <script src="https://unpkg.com/wasm-feature-detect/dist/umd/index.js"></script>
 <script>
-  if (await wasmFeatureDetect.simd()) {
-    // ...
-  }
+	if (await wasmFeatureDetect.simd()) {
+	  // ...
+	}
 </script>
 ```
 
@@ -53,7 +53,7 @@ If required, there’s also a UMD version
 All detectors return a `Promise<bool>`.
 
 | Function | Proposal |
-| --- | --- |
+| -------- | -------- |
 <% for (let detector of detectors) { _%>
 | `<%= detector.func %>()` | [<%= detector.name %>](<%= detector.proposal %>) |
 <%_ } %>
