@@ -31,7 +31,7 @@ async function run() {
 			const name = (/;;\s*Name:\s*(.+)$/im.exec(index) || ["", ""])[1];
 			const proposal = (/;;\s*Proposal:\s*(.+)$/im.exec(index) || ["", ""])[1];
 			return { name, proposal, func };
-		})
+		}),
 	);
 	const lib = await fsp.readFile("./dist/esm/index.js");
 	const gzippedLib = gzipSync(lib, { level: 9 });

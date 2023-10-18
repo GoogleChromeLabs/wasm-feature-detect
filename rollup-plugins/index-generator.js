@@ -39,7 +39,7 @@ export default function ({ indexPath, format }) {
 						])[1].split(" ");
 						const moduleBuffer = await compileWat(
 							`${path}/module.wat`,
-							features
+							features,
 						);
 						moduleBytes = JSON.stringify([...moduleBuffer]);
 					} else if (await fileExists(`${path}/module.wast`)) {
@@ -50,7 +50,7 @@ export default function ({ indexPath, format }) {
 						const importName = `${name}_internal`;
 						return {
 							import: `import ${importName} from ${JSON.stringify(
-								`${path}/index.js`
+								`${path}/index.js`,
 							)};`,
 							exportName: name,
 							exportValue: `() => ${importName}(new Uint8Array(${moduleBytes}))`,
@@ -61,7 +61,7 @@ export default function ({ indexPath, format }) {
 							exportValue: `async () => WebAssembly.validate(new Uint8Array(${moduleBytes}))`,
 						};
 					}
-				})
+				}),
 			);
 
 			let exports;

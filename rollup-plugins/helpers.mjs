@@ -23,7 +23,7 @@ export async function compileWat(watPath, features = []) {
 	const module = (await wabt).parseWat(
 		watPath,
 		watSource,
-		Object.fromEntries(features.map((flag) => [flag, true]))
+		Object.fromEntries(features.map((flag) => [flag, true])),
 	);
 	return module.toBinary({ canonicalize_lebs: true }).buffer;
 }

@@ -1,6 +1,6 @@
 {
   "name": "wasm-feature-detect",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "A small library to detect which features of WebAssembly are supported in your current browser.",
   "exports": {
     "import": "./dist/esm/index.js",
@@ -18,7 +18,7 @@
     "build": "npm run build:library && npm run build:readme && npm run build:dts && npm run fmt",
     "build:website": "npm run build && node genwebsite.cjs",
     "prepublishOnly": "npm run build",
-    "fmt": "prettier --write ./{src,test,rollup-plugins}/*.{mjs,cjs,js,md} *.{mjs,cjs,js,md}",
+    "fmt": "prettier --write --no-error-on-unmatched-pattern ./{src,test,rollup-plugins}/*.{mjs,cjs,js,md} *.{mjs,cjs,js,md}",
     "fmt_test": "prettier --check --no-error-on-unmatched-pattern --write ./{src,test,rollup-plugins}/*.{mjs,cjs,js,md} *.{mjs,cjs,js,md}",
     "test": "npm run fmt_test && npm run build && node --no-warnings test/index.cjs"
   },
@@ -27,15 +27,15 @@
   "author": "Surma <surma@surma.link>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^24.0.1",
-    "@rollup/plugin-terser": "^0.4.0",
-    "binaryen": "^111.0.0",
-    "ejs": "^3.1.7",
-    "highlight.js": "^11.7.0",
-    "magic-string": "^0.25.4",
-    "markdown-it": "^12.3.2",
-    "prettier": "^2.8.3",
-    "rollup": "^3.12.1",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-terser": "^0.4.4",
+    "binaryen": "^114.0.0",
+    "ejs": "^3.1.9",
+    "highlight.js": "^11.9.0",
+    "magic-string": "^0.30.5",
+    "markdown-it": "^13.0.2",
+    "prettier": "^3.0.3",
+    "rollup": "^4.1.4",
     "wabt": "^1.0.32"
   }
 }

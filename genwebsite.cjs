@@ -23,7 +23,7 @@ async function init() {
 	await fsp.copyFile("./dist/esm/index.js", "./website/wasm-feature-detect.js");
 	await fsp.copyFile(
 		"./node_modules/highlight.js/styles/github.css",
-		"./website/syntax.css"
+		"./website/syntax.css",
 	);
 
 	const template = await fsp.readFile("./website.ejs", "utf8");
