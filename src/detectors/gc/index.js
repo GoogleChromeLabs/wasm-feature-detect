@@ -12,9 +12,9 @@
  */
 
 /*
-;; Name: JavaScript Promise Integration
-;; Proposal: https://github.com/WebAssembly/js-promise-integration
-;; Features: jspi
+;; Name: Garbage Collection
+;; Proposal: https://github.com/WebAssembly/gc
+;; Features: gc
 */
 
 export default async () => {
