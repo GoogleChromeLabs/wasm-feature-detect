@@ -40,36 +40,36 @@ export default function () {
 				assert.strictEqual(
 					ast.body.length,
 					2,
-					"Bundle should have only two items at the top level."
+					"Bundle should have only two items at the top level.",
 				);
 				const [varDecl, exportDecl] = ast.body;
 				// 2) First is a variable declaration (for `const ...`).
 				assert.strictEqual(
 					varDecl.type,
 					"VariableDeclaration",
-					"First top-level item should be a variable declaration."
+					"First top-level item should be a variable declaration.",
 				);
 				// 3) Second is a local export list (`export { ... }`).
 				assert.strictEqual(
 					exportDecl.type,
 					"ExportNamedDeclaration",
-					"Second top-level item should be an export declaration."
+					"Second top-level item should be an export declaration.",
 				);
 				assert.strictEqual(
 					exportDecl.declaration,
 					null,
-					"Export declaration should contain a list of items."
+					"Export declaration should contain a list of items.",
 				);
 				assert.strictEqual(
 					exportDecl.source,
 					null,
-					"Export declaration should export local items."
+					"Export declaration should export local items.",
 				);
 				// 4) Their counts must match.
 				assert.strictEqual(
 					varDecl.declarations.length,
 					exportDecl.specifiers.length,
-					"List of exports should contain as many items as there are variables."
+					"List of exports should contain as many items as there are variables.",
 				);
 				// Now, perform actual transformation - inline exported name back
 				// into each variable declarator.
@@ -78,14 +78,14 @@ export default function () {
 					exportDecl.specifiers.map((spec) => [
 						spec.local.name,
 						spec.exported.name,
-					])
+					]),
 				);
 				for (const { id } of varDecl.declarations) {
 					const exportedName = exportMap.get(id.name);
 					// Make sure we're exporting only declared vars.
 					assert(
 						exportedName,
-						`Export declaration for ${id.name} does not match a local variable.`
+						`Export declaration for ${id.name} does not match a local variable.`,
 					);
 					exportMap.delete(id.name);
 					output.overwrite(id.start, id.end, exportedName);

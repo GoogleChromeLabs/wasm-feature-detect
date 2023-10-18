@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Google Inc. All Rights Reserved.
+ * Copyright 2023 Google Inc. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,13 +11,13 @@
  * limitations under the License.
  */
 
-import { writeFileSync } from "fs";
+/*
+;; Name: JavaScript Promise Integration
+;; Proposal: https://github.com/WebAssembly/js-promise-integration
+;; Features: jspi
+*/
 
-import { plugins } from "./rollup-plugins/helpers.mjs";
-
-writeFileSync(
-	"./dist/index.d.ts",
-	`export const\n${plugins
-		.map(({ name }) => `${name}: () => Promise<boolean>`)
-		.join(",\n")};`,
-);
+export default async () => {
+	 const bytes = [0, 97, 115, 109, 1, 0, 0, 0, 1, 5, 1, 95, 1, 120, 0];
+	 return WebAssembly.validate(new Uint8Array(bytes));
+ };
