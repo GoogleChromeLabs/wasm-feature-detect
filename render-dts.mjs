@@ -21,3 +21,10 @@ writeFileSync(
 		.map(({ name }) => `${name}: () => Promise<boolean>`)
 		.join(",\n")};`,
 );
+
+writeFileSync(
+	"./dist/index.d.cts",
+	`export const\n${plugins
+		.map(({ name }) => `${name}: () => Promise<boolean>`)
+		.join(",\n")};`,
+);
