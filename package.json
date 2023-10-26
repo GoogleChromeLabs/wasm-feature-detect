@@ -3,8 +3,14 @@
   "version": "1.6.0",
   "description": "A small library to detect which features of WebAssembly are supported in your current browser.",
   "exports": {
-    "import": "./dist/esm/index.js",
-    "require": "./dist/cjs/index.cjs"
+    "import": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/esm/index.js"
+    },
+    "require": {
+      "types": "./dist/index.d.cts",
+      "default": "./dist/cjs/index.cjs"
+    }
   },
   "types": "dist/index.d.ts",
   "type": "module",
