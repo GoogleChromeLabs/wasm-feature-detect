@@ -18,5 +18,5 @@
 */
 
 export default async () => {
-  return "Suspender" in WebAssembly;
+  return "Suspending" in WebAssembly;
 };
