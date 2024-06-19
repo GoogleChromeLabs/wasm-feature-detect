@@ -48,7 +48,7 @@ export default ["esm", "cjs", "umd"].map((format) => ({
 						},
 					}),
 					...(format === "esm" ? [exportInPlace()] : []),
-			  ]),
+				]),
 		sizePrinter(),
 	],
 }));
