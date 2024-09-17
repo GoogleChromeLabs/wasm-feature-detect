@@ -1,4 +1,4 @@
-;; Name: Exception handling
+;; Name: Legacy Exception Handling
 ;; Proposal: https://github.com/WebAssembly/exception-handling
 ;; Features: exceptions
 

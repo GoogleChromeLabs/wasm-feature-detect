@@ -6,7 +6,7 @@ A small library to detect which features of WebAssembly are supported.
 - ✅ Tree-shakable (only bundle the detectors you use)
 - ✅ Provided as an ES6, CommonJS and UMD module.
 - ✅ CSP compatible
-- ✅ All detectors add up to only ~730B gzipped
+- ✅ All detectors add up to only ~980B gzipped
 
 ## Installation
 
@@ -52,27 +52,30 @@ If required, there’s also a UMD version
 
 All detectors return a `Promise<bool>`.
 
-| Function                 | Proposal                                                                                                     |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `bigInt()`               | [BigInt integration](https://github.com/WebAssembly/JS-BigInt-integration)                                   |
-| `bulkMemory()`           | [Bulk memory operations](https://github.com/webassembly/bulk-memory-operations)                              |
-| `exceptions()`           | [Exception handling](https://github.com/WebAssembly/exception-handling)                                      |
-| `extendedConst()`        | [Extented Const Expressesions](https://github.com/WebAssembly/extended-const)                                |
-| `gc()`                   | [Garbage Collection](https://github.com/WebAssembly/gc)                                                      |
-| `jspi()`                 | [JavaScript Promise Integration](https://github.com/WebAssembly/js-promise-integration)                      |
-| `memory64()`             | [Memory64](https://github.com/WebAssembly/memory64)                                                          |
-| `multiMemory()`          | [Multiple Memories](https://github.com/WebAssembly/multi-memory)                                             |
-| `multiValue()`           | [Multi-value](https://github.com/WebAssembly/multi-value)                                                    |
-| `mutableGlobals()`       | [Importable/Exportable mutable globals]()                                                                    |
-| `referenceTypes()`       | [Reference Types](https://github.com/WebAssembly/reference-types)                                            |
-| `relaxedSimd()`          | [Relaxed SIMD](https://github.com/webassembly/relaxed-simd)                                                  |
-| `saturatedFloatToInt()`  | [Non-trapping float-to-int conversions](https://github.com/WebAssembly/nontrapping-float-to-int-conversions) |
-| `signExtensions()`       | [Sign-extension operators](https://github.com/WebAssembly/sign-extension-ops)                                |
-| `simd()`                 | [Fixed-Width SIMD](https://github.com/webassembly/simd)                                                      |
-| `streamingCompilation()` | [Streaming Compilation](https://webassembly.github.io/spec/web-api/index.html#streaming-modules)             |
-| `tailCall()`             | [Tail call](https://github.com/webassembly/tail-call)                                                        |
-| `threads()`              | [Threads](https://github.com/webassembly/threads)                                                            |
-| `typeReflection()`       | [Type Reflection](https://github.com/WebAssembly/js-types)                                                   |
+| Function                    | Proposal                                                                                                     |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `bigInt()`                  | [BigInt integration](https://github.com/WebAssembly/JS-BigInt-integration)                                   |
+| `bulkMemory()`              | [Bulk memory operations](https://github.com/webassembly/bulk-memory-operations)                              |
+| `exceptions()`              | [Legacy Exception Handling](https://github.com/WebAssembly/exception-handling)                               |
+| `exceptionsFinal()`         | [Exception Handling with exnref](https://github.com/WebAssembly/exception-handling)                          |
+| `extendedConst()`           | [Extented Const Expressesions](https://github.com/WebAssembly/extended-const)                                |
+| `gc()`                      | [Garbage Collection](https://github.com/WebAssembly/gc)                                                      |
+| `jsStringBuiltins()`        | [JS String Builtins Proposal for WebAssembly](https://github.com/WebAssembly/js-string-builtins)             |
+| `jspi()`                    | [JavaScript Promise Integration](https://github.com/WebAssembly/js-promise-integration)                      |
+| `memory64()`                | [Memory64](https://github.com/WebAssembly/memory64)                                                          |
+| `multiMemory()`             | [Multiple Memories](https://github.com/WebAssembly/multi-memory)                                             |
+| `multiValue()`              | [Multi-value](https://github.com/WebAssembly/multi-value)                                                    |
+| `mutableGlobals()`          | [Importable/Exportable mutable globals]()                                                                    |
+| `referenceTypes()`          | [Reference Types](https://github.com/WebAssembly/reference-types)                                            |
+| `relaxedSimd()`             | [Relaxed SIMD](https://github.com/webassembly/relaxed-simd)                                                  |
+| `saturatedFloatToInt()`     | [Non-trapping float-to-int conversions](https://github.com/WebAssembly/nontrapping-float-to-int-conversions) |
+| `signExtensions()`          | [Sign-extension operators](https://github.com/WebAssembly/sign-extension-ops)                                |
+| `simd()`                    | [Fixed-Width SIMD](https://github.com/webassembly/simd)                                                      |
+| `streamingCompilation()`    | [Streaming Compilation](https://webassembly.github.io/spec/web-api/index.html#streaming-modules)             |
+| `tailCall()`                | [Tail call](https://github.com/webassembly/tail-call)                                                        |
+| `threads()`                 | [Threads](https://github.com/webassembly/threads)                                                            |
+| `typeReflection()`          | [Type Reflection](https://github.com/WebAssembly/js-types)                                                   |
+| `typedFunctionReferences()` | [Typed function references](https://github.com/WebAssembly/function-references)                              |
 
 ## Why are all the tests async?
 
