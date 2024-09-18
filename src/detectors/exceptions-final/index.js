@@ -19,7 +19,7 @@
 
 export default async () => {
 	try {
-		await WebAssembly.Module(
+		new WebAssembly.Module(
 			Uint8Array.from(
 				atob("AGFzbQEAAAABBAFgAAADAgEAChABDgACaR9AAQMAAAsACxoL"),
 				(m) => m.codePointAt(0),
