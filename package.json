@@ -39,7 +39,7 @@
   "author": "Surma <surma@surma.link>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-terser": "^0.4.4",
     "binaryen": "^119.0.0",
     "ejs": "^3.1.10",
