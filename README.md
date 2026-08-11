@@ -65,7 +65,7 @@ All detectors return a `Promise<bool>`.
 | `memory64()`                | [Memory64](https://github.com/WebAssembly/memory64)                                                          |
 | `multiMemory()`             | [Multiple Memories](https://github.com/WebAssembly/multi-memory)                                             |
 | `multiValue()`              | [Multi-value](https://github.com/WebAssembly/multi-value)                                                    |
-| `mutableGlobals()`          | [Importable/Exportable mutable globals]()                                                                    |
+| `mutableGlobals()`          | [Importable/Exportable mutable globals](<>)                                                                  |
 | `referenceTypes()`          | [Reference Types](https://github.com/WebAssembly/reference-types)                                            |
 | `relaxedSimd()`             | [Relaxed SIMD](https://github.com/webassembly/relaxed-simd)                                                  |
 | `saturatedFloatToInt()`     | [Non-trapping float-to-int conversions](https://github.com/WebAssembly/nontrapping-float-to-int-conversions) |

@@ -1,6 +1,6 @@
 {
   "name": "wasm-feature-detect",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "A small library to detect which features of WebAssembly are supported in your current browser.",
   "exports": {
     ".": {
@@ -39,15 +39,15 @@
   "author": "Surma <surma@surma.link>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^26.0.1",
-    "@rollup/plugin-terser": "^0.4.4",
-    "binaryen": "^119.0.0",
-    "ejs": "^3.1.10",
-    "highlight.js": "^11.10.0",
-    "magic-string": "^0.30.11",
-    "markdown-it": "^14.1.0",
-    "prettier": "^3.3.3",
-    "rollup": "^4.21.3",
-    "wabt": "^1.0.36"
+    "@rollup/plugin-commonjs": "^29.0.3",
+    "@rollup/plugin-terser": "^1.0.0",
+    "binaryen": "^131.0.0",
+    "ejs": "^6.0.1",
+    "highlight.js": "^11.11.1",
+    "magic-string": "^1.1.0",
+    "markdown-it": "^15.0.0",
+    "prettier": "^3.9.6",
+    "rollup": "^4.62.4",
+    "wabt": "^1.0.39"
   }
 }
