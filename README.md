@@ -6,7 +6,7 @@ A small library to detect which features of WebAssembly are supported.
 - ✅ Tree-shakable (only bundle the detectors you use)
 - ✅ Provided as an ES6, CommonJS and UMD module.
 - ✅ CSP compatible
-- ✅ All detectors add up to only ~1020B gzipped
+- ✅ All detectors add up to only ~2660B gzipped
 
 ## Installation
 
@@ -71,6 +71,7 @@ All detectors return a `Promise<bool>`.
 | `saturatedFloatToInt()`     | [Non-trapping float-to-int conversions](https://github.com/WebAssembly/nontrapping-float-to-int-conversions) |
 | `signExtensions()`          | [Sign-extension operators](https://github.com/WebAssembly/sign-extension-ops)                                |
 | `simd()`                    | [Fixed-Width SIMD](https://github.com/webassembly/simd)                                                      |
+| `sourcePhaseImports()`      | [Source Phase Imports](https://github.com/tc39/proposal-source-phase-imports)                                |
 | `streamingCompilation()`    | [Streaming Compilation](https://webassembly.github.io/spec/web-api/index.html#streaming-modules)             |
 | `tailCall()`                | [Tail call](https://github.com/webassembly/tail-call)                                                        |
 | `threads()`                 | [Threads](https://github.com/webassembly/threads)                                                            |
