@@ -19,9 +19,20 @@
 
 export default async () => {
 	try {
-		await import.source("data:application/wasm;charset=utf-8;base64,AGFzbQEAAAAACARuYW1lAgEA");
+		// Keep the syntax in a string, so bundlers that can't parse source phase
+		// imports yet can still bundle this library.
+		await new Function(
+			'return import.source("data:application/wasm;charset=utf-8;base64,AGFzbQEAAAAACARuYW1lAgEA")',
+		)();
 		return true;
 	} catch (e) {
+		// A CSP without 'unsafe-eval' blocks `new Function()`. Fall back to the
+		// prototype that source phase imports add to `WebAssembly.Module`.
+		if (e instanceof EvalError) {
+			return (
+				Object.getPrototypeOf(WebAssembly.Module.prototype) !== Object.prototype
+			);
+		}
 		return false;
 	}
 };
