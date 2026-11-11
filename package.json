@@ -47,7 +47,7 @@
     "magic-string": "^1.4.5",
     "markdown-it": "^15.0.3",
     "prettier": "^3.9.10",
-    "rollup": "^4.68.1",
+    "rollup": "^4.68.2",
     "wabt": "^1.0.39"
   }
 }
